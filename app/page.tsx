@@ -800,7 +800,7 @@ export default function Home() {
             <div>
               <h4 style={{ color: '#fff', fontWeight: 600, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 20 }}>Legal</h4>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
-                {[{ l: 'Política de privacidad', h: '/politica-de-privacidad' }, { l: 'Términos de servicio', h: '/terminos-de-servicio' }, { l: 'Cookies', h: '/politica-de-cookies' }].map(i => (
+                {[{ l: 'Política de privacidad', h: '/politica-de-privacidad.html' }, { l: 'Términos de servicio', h: '/terminos-de-servicio.html' }, { l: 'Cookies', h: '/politica-de-cookies.html' }].map(i => (
                   <li key={i.l}><a href={i.h} className="footer-link" style={{ color: 'rgba(154,175,199,0.55)', fontSize: 13 }}>{i.l}</a></li>
                 ))}
               </ul>
