@@ -7,9 +7,9 @@ interface Message {
   content: string
 }
 
-const INITIAL_MESSAGES: Message[] = [
-  { role: 'assistant', content: '¡Hola! ¿En qué puedo ayudarte hoy?' },
-]
+interface ChatCardProps {
+  lang?: 'es' | 'en'
+}
 
 function BotAvatar() {
   return (
@@ -47,8 +47,10 @@ function TypingDots() {
   )
 }
 
-export default function ChatCard() {
-  const [messages, setMessages] = useState<Message[]>(INITIAL_MESSAGES)
+export default function ChatCard({ lang = 'es' }: ChatCardProps) {
+  const [messages, setMessages] = useState<Message[]>([
+    { role: 'assistant', content: lang === 'en' ? 'Hello! How can I help you today?' : '¡Hola! ¿En qué puedo ayudarte hoy?' },
+  ])
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const messagesContainerRef = useRef<HTMLDivElement>(null)
@@ -136,11 +138,11 @@ export default function ChatCard() {
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
         <p style={{ fontSize: 11, color: 'rgba(154,175,199,0.5)', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 500 }}>
-          Chatbot activo
+          {lang === 'en' ? 'Active chatbot' : 'Chatbot activo'}
         </p>
         <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
           <span className="pulse-dot" style={{ width: 6, height: 6, borderRadius: '50%', background: '#4ade80', display: 'inline-block' }} />
-          <span style={{ fontSize: 10, color: 'rgba(154,175,199,0.5)' }}>En línea</span>
+          <span style={{ fontSize: 10, color: 'rgba(154,175,199,0.5)' }}>{lang === 'en' ? 'Online' : 'En línea'}</span>
         </span>
       </div>
 
@@ -195,7 +197,7 @@ export default function ChatCard() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="Escribe tu mensaje..."
+          placeholder={lang === 'en' ? 'Type your message...' : 'Escribe tu mensaje...'}
           maxLength={500}
           disabled={isLoading}
           style={{
