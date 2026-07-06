@@ -52,7 +52,7 @@ const T = {
     footer: {
       services: 'Servicios', company: 'Empresa', legal: 'Legal',
       copyright: '©2026 G.I.A. Solutions. Todos los derechos reservados.',
-      svcLinks: ['Creación de páginas web', 'Chatbots con IA', 'Auditoría digital de tu negocio', 'Asistentes de auditoría bajo normas ISO'],
+      svcLinks: ['Creación de páginas web', 'Menús digitales inteligentes', 'Auditoría digital de tu negocio', 'Asistentes de auditoría bajo normas ISO'],
       compLinks: [{ l: 'Nosotros', h: '#' }, { l: 'Casos de éxito', h: '#testimonios' }, { l: 'FAQ', h: '#faq' }, { l: 'Contacto', h: '#contacto' }],
     },
   },
@@ -99,7 +99,7 @@ const T = {
     footer: {
       services: 'Services', company: 'Company', legal: 'Legal',
       copyright: '©2026 G.I.A. Solutions. All rights reserved.',
-      svcLinks: ['Website development', 'AI-powered chatbots', 'Digital business audit', 'ISO-compliant audit assistants'],
+      svcLinks: ['Website development', 'Smart digital menus', 'Digital business audit', 'ISO-compliant audit assistants'],
       compLinks: [{ l: 'About', h: '#' }, { l: 'Case studies', h: '#testimonios' }, { l: 'FAQ', h: '#faq' }, { l: 'Contact', h: '#contacto' }],
     },
   },
@@ -144,14 +144,14 @@ const SERVICES_DATA: Record<Lang, ServiceItem[]> = {
       ],
     },
     {
-      label: 'Implementación de Chatbots', title: 'Atención 24/7 sin', titleGrad: 'contratar más personal',
-      desc: 'Nuestros chatbots con IA responden, califican y convierten leads automáticamente, en español y con el tono de tu marca.',
-      desc2: 'Se integran con WhatsApp, Instagram, tu sitio web y tu CRM. Aprenden con cada conversación.',
-      back: '02 — Chatbots con IA', reverse: true,
+      label: 'Menús Digitales Inteligentes', title: 'Tu menú, tu marca,', titleGrad: 'pedidos sin fricción',
+      desc: 'Pedido por QR en la mesa: tus clientes arman su pedido y lo envían directo a cocina, sin descargar ninguna app.',
+      desc2: 'Categorías, fotos y disponibilidad configurable, con facturación electrónica al SRI integrada.',
+      back: '02 — Menús Digitales', reverse: true,
       features: [
-        { icon: 'M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z', title: 'Multi-canal: WhatsApp, Web, Instagram', desc: 'Un solo bot, todos los canales. Gestión centralizada en tiempo real.' },
-        { icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z', title: 'Calificación automática de leads', desc: 'Filtra y prioriza contactos según su nivel de interés.' },
-        { icon: 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z', title: 'Personalidad de marca incluida', desc: 'Tu bot habla como tú: mismo tono, mismos valores.' },
+        { icon: 'M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 013.75 9.375v-4.5zM3.75 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 01-1.125-1.125v-4.5zM13.5 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0113.5 9.375v-4.5z', title: 'Pedido por QR en la mesa', desc: 'El cliente escanea, arma su pedido y lo envía sin instalar nada.' },
+        { icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z', title: 'Cocina en tiempo real', desc: 'Cada orden llega al instante a la pantalla de cocina, sin papeles.' },
+        { icon: 'M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z', title: 'Gestión completa del menú', desc: 'Edita precios, fotos y disponibilidad al instante, sin soporte técnico.' },
       ],
     },
     {
@@ -179,14 +179,14 @@ const SERVICES_DATA: Record<Lang, ServiceItem[]> = {
       ],
     },
     {
-      label: 'AI Chatbot Development', title: 'Always-on support,', titleGrad: 'zero extra headcount',
-      desc: 'Our AI chatbots engage, qualify, and nurture leads around the clock — in your brand voice, across every channel your customers already use.',
-      desc2: 'Plug into WhatsApp, Instagram, your website, and your CRM. They get smarter with every interaction.',
-      back: '02 — AI Chatbots', reverse: true,
+      label: 'Smart Digital Menus', title: 'Your menu, your brand,', titleGrad: 'zero-friction ordering',
+      desc: 'QR ordering at the table: customers build their order and send it straight to the kitchen, no app download required.',
+      desc2: 'Categories, photos, and configurable availability, with built-in electronic invoicing.',
+      back: '02 — Digital Menus', reverse: true,
       features: [
-        { icon: 'M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z', title: 'Omnichannel: WhatsApp, Web, Instagram', desc: 'One bot, every channel — managed from a single dashboard.' },
-        { icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z', title: 'Automated lead qualification', desc: 'Filter and rank prospects by intent before you pick up the phone.' },
-        { icon: 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z', title: 'Your voice, baked in', desc: 'Your bot sounds exactly like you — same tone, same personality, same values.' },
+        { icon: 'M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 013.75 9.375v-4.5zM3.75 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 01-1.125-1.125v-4.5zM13.5 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0113.5 9.375v-4.5z', title: 'QR ordering at the table', desc: 'Customers scan, order, and send — no app install, works on any device.' },
+        { icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z', title: 'Kitchen connected in real time', desc: 'Every order hits the kitchen display instantly — no paper tickets, no transcription errors.' },
+        { icon: 'M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z', title: 'Full menu control, no dev needed', desc: 'Update prices, photos, and availability instantly — no reprinted menus, no third parties.' },
       ],
     },
     {
@@ -495,7 +495,7 @@ export default function Home() {
             <a href="#contacto" className="btn-primary hidden md:inline-flex" style={{ fontSize: 13, padding: '10px 20px', borderRadius: 8, textDecoration: 'none' }}>
               {t.nav.cta}
             </a>
-            <button onClick={() => setMenuOpen(o => !o)} className="md:hidden" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 8, color: '#9aafc7' }} aria-label="Menú">
+            <button onClick={() => setMenuOpen(o => !o)} className="md:hidden" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 8, color: '#9aafc7' }} aria-label={lang === 'en' ? 'Menu' : 'Menú'}>
               {menuOpen ? (
                 <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
               ) : (
@@ -911,7 +911,10 @@ export default function Home() {
             <div>
               <h4 style={{ color: '#fff', fontWeight: 600, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 20 }}>{t.footer.legal}</h4>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
-                {[{ l: 'Política de privacidad', h: '/politica-de-privacidad.html' }, { l: 'Términos de servicio', h: '/terminos-de-servicio.html' }, { l: 'Cookies', h: '/politica-de-cookies.html' }].map(i => (
+                {(lang === 'en'
+                  ? [{ l: 'Privacy Policy', h: '/politica-de-privacidad.html' }, { l: 'Terms of Service', h: '/terminos-de-servicio.html' }, { l: 'Cookies', h: '/politica-de-cookies.html' }]
+                  : [{ l: 'Política de privacidad', h: '/politica-de-privacidad.html' }, { l: 'Términos de servicio', h: '/terminos-de-servicio.html' }, { l: 'Cookies', h: '/politica-de-cookies.html' }]
+                ).map(i => (
                   <li key={i.l}><a href={i.h} className="footer-link" style={{ color: 'rgba(154,175,199,0.55)', fontSize: 13 }}>{i.l}</a></li>
                 ))}
               </ul>

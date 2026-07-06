@@ -78,12 +78,14 @@ export default function ChatCard({ lang = 'es' }: ChatCardProps) {
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: nextMessages }),
+        body: JSON.stringify({ messages: nextMessages, lang }),
       })
 
       // Handle structured error responses from the API
       if (!res.ok) {
-        let friendlyMsg = 'Lo siento, el asistente no está disponible ahora. Puedes contactarnos por WhatsApp: +593 995 002 996'
+        let friendlyMsg = lang === 'en'
+          ? 'Sorry, the assistant is unavailable right now. You can reach us on WhatsApp: +593 995 002 996'
+          : 'Lo siento, el asistente no está disponible ahora. Puedes contactarnos por WhatsApp: +593 995 002 996'
         try {
           const errData = await res.json()
           if (errData?.error) friendlyMsg = errData.error
@@ -95,7 +97,7 @@ export default function ChatCard({ lang = 'es' }: ChatCardProps) {
         return
       }
 
-      if (!res.body) throw new Error('Sin cuerpo de respuesta')
+      if (!res.body) throw new Error('No response body')
 
       const reader = res.body.getReader()
       const decoder = new TextDecoder()
@@ -115,7 +117,7 @@ export default function ChatCard({ lang = 'es' }: ChatCardProps) {
     } catch {
       setMessages((prev) => [
         ...prev.slice(0, -1),
-        { role: 'assistant', content: 'Ocurrió un error de conexión. Por favor intenta de nuevo.' },
+        { role: 'assistant', content: lang === 'en' ? 'A connection error occurred. Please try again.' : 'Ocurrió un error de conexión. Por favor intenta de nuevo.' },
       ])
     } finally {
       setIsLoading(false)

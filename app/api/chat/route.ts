@@ -95,24 +95,53 @@ function errorResponse(message: string, status: number) {
   })
 }
 
+const MESSAGES = {
+  es: {
+    invalidJson: 'El cuerpo de la solicitud no es JSON válido.',
+    missingMessages: 'Falta el campo "messages" en la solicitud.',
+    emptyMessages: '"messages" debe ser un array no vacío.',
+    noValidMessages: 'No se encontraron mensajes válidos en la solicitud.',
+    serviceUnavailable: 'Servicio de IA no disponible temporalmente.',
+    streamError: '\n\n_(Lo siento, ocurrió un error al generar la respuesta. Por favor, intenta de nuevo.)_',
+    rateLimit: 'El servicio de IA está muy ocupado en este momento. Por favor, espera unos segundos e intenta de nuevo.',
+    timeout: 'La solicitud tardó demasiado. Por favor, intenta de nuevo.',
+    generalError: 'El asistente de IA no está disponible en este momento. Por favor, contáctanos directamente por WhatsApp: +593 995 002 996',
+  },
+  en: {
+    invalidJson: 'The request body is not valid JSON.',
+    missingMessages: 'The "messages" field is missing from the request.',
+    emptyMessages: '"messages" must be a non-empty array.',
+    noValidMessages: 'No valid messages were found in the request.',
+    serviceUnavailable: 'AI service temporarily unavailable.',
+    streamError: "\n\n_(Sorry, something went wrong while generating the response. Please try again.)_",
+    rateLimit: 'The AI service is very busy right now. Please wait a few seconds and try again.',
+    timeout: 'The request took too long. Please try again.',
+    generalError: 'The AI assistant is unavailable right now. Please contact us directly on WhatsApp: +593 995 002 996',
+  },
+} as const
+
 export async function POST(req: NextRequest) {
   // ── 1. Parse body ──────────────────────────────────────────────────────────
   let body: unknown
   try {
     body = await req.json()
   } catch {
-    return errorResponse('El cuerpo de la solicitud no es JSON válido.', 400)
+    return errorResponse(MESSAGES.es.invalidJson, 400)
   }
+
+  const lang: 'es' | 'en' =
+    body && typeof body === 'object' && (body as { lang?: unknown }).lang === 'en' ? 'en' : 'es'
+  const msg = MESSAGES[lang]
 
   // ── 2. Validate messages array ─────────────────────────────────────────────
   if (!body || typeof body !== 'object' || !('messages' in (body as object))) {
-    return errorResponse('Falta el campo "messages" en la solicitud.', 400)
+    return errorResponse(msg.missingMessages, 400)
   }
 
   const rawMessages = (body as { messages: unknown }).messages
 
   if (!Array.isArray(rawMessages) || rawMessages.length === 0) {
-    return errorResponse('"messages" debe ser un array no vacío.', 400)
+    return errorResponse(msg.emptyMessages, 400)
   }
 
   // ── 3. Filter and sanitize valid messages ──────────────────────────────────
@@ -121,7 +150,7 @@ export async function POST(req: NextRequest) {
     .map((m) => ({ role: m.role, content: sanitizeText(m.content) }))
 
   if (validMessages.length === 0) {
-    return errorResponse('No se encontraron mensajes válidos en la solicitud.', 400)
+    return errorResponse(msg.noValidMessages, 400)
   }
 
   // ── 4. Truncate history (context window guard) ─────────────────────────────
@@ -133,7 +162,7 @@ export async function POST(req: NextRequest) {
   // ── 5. Validate API key ────────────────────────────────────────────────────
   if (!process.env.GEMINI_API_KEY) {
     console.error('[chat/route] GEMINI_API_KEY no está configurado.')
-    return errorResponse('Servicio de IA no disponible temporalmente.', 503)
+    return errorResponse(msg.serviceUnavailable, 503)
   }
 
   // ── 6. Call Gemini with streaming ──────────────────────────────────────────
@@ -168,11 +197,7 @@ export async function POST(req: NextRequest) {
         } catch (streamErr) {
           console.error('[chat/route] Error durante el streaming:', streamErr)
           // Send a graceful error message inside the stream so the frontend displays it
-          controller.enqueue(
-            encoder.encode(
-              '\n\n_(Lo siento, ocurrió un error al generar la respuesta. Por favor, intenta de nuevo.)_'
-            )
-          )
+          controller.enqueue(encoder.encode(msg.streamError))
         } finally {
           controller.close()
         }
@@ -199,21 +224,12 @@ export async function POST(req: NextRequest) {
       error.message?.toLowerCase().includes('deadline')
 
     if (isRateLimit) {
-      return errorResponse(
-        'El servicio de IA está muy ocupado en este momento. Por favor, espera unos segundos e intenta de nuevo.',
-        429
-      )
+      return errorResponse(msg.rateLimit, 429)
     }
     if (isTimeout) {
-      return errorResponse(
-        'La solicitud tardó demasiado. Por favor, intenta de nuevo.',
-        504
-      )
+      return errorResponse(msg.timeout, 504)
     }
 
-    return errorResponse(
-      'El asistente de IA no está disponible en este momento. Por favor, contáctanos directamente por WhatsApp: +593 995 002 996',
-      503
-    )
+    return errorResponse(msg.generalError, 503)
   }
 }
