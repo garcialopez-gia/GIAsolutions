@@ -23,6 +23,7 @@ const T = {
       h2a: 'Conoce la Nueva Experiencia', h2b: 'de Crecimiento Digital',
       desc: 'Combinamos automatizaciones con estrategia digital para llevar tu negocio al siguiente nivel.',
       tapFwd: 'Toca para ver detalles', tapBack: 'Toca para volver',
+      demo: 'Solicita tu demo gratis',
     },
     proc: {
       badge: 'Nuestro Proceso', h2a: 'Supera a todos.', h2b: 'Empieza ahora.',
@@ -30,7 +31,7 @@ const T = {
       cta1: 'Solicitar diagnóstico gratuito', cta2: 'Explorar más',
       trust: 'Sin tarjeta de crédito · Respuesta en 24h',
     },
-    test: { badge: 'Testimonios', h2: 'Lo que dicen nuestros clientes' },
+    test: { badge: 'Testimonios', h2: 'Lo que dicen nuestros clientes', prev: 'Anterior', next: 'Siguiente' },
     faqSec: { badge: 'Preguntas frecuentes', h2: 'Todo lo que necesitas saber' },
     contact: {
       badge: 'Diagnóstico gratuito',
@@ -70,6 +71,7 @@ const T = {
       h2a: 'The smarter path', h2b: 'to sustainable growth',
       desc: 'We pair intelligent automation with proven digital strategy — so your business scales without the overhead.',
       tapFwd: 'Tap to see details', tapBack: 'Tap to go back',
+      demo: 'Request your free demo',
     },
     proc: {
       badge: 'How It Works', h2a: 'Leave competitors behind.', h2b: 'Start today.',
@@ -77,7 +79,7 @@ const T = {
       cta1: 'Book your free strategy call', cta2: 'See our work',
       trust: 'No credit card required · Response within 24h',
     },
-    test: { badge: 'Client Stories', h2: 'What our clients are saying' },
+    test: { badge: 'Client Stories', h2: 'What our clients are saying', prev: 'Previous', next: 'Next' },
     faqSec: { badge: 'Got questions?', h2: 'Everything you need to know' },
     contact: {
       badge: 'Free Growth Audit',
@@ -126,7 +128,7 @@ const FAQ_DATA: Record<Lang, { q: string; a: string }[]> = {
 // ─── SERVICE DATA ─────────────────────────────────────────────────────────────
 type ServiceItem = {
   label: string; title: string; titleGrad: string; desc: string; desc2: string; back: string;
-  reverse?: boolean;
+  reverse?: boolean; demoHref?: string;
   features: { icon: string; title: string; desc: string }[]
 }
 
@@ -146,8 +148,8 @@ const SERVICES_DATA: Record<Lang, ServiceItem[]> = {
     {
       label: 'Menús Digitales Inteligentes', title: 'Tu menú, tu marca,', titleGrad: 'pedidos sin fricción',
       desc: 'Pedido por QR en la mesa: tus clientes arman su pedido y lo envían directo a cocina, sin descargar ninguna app.',
-      desc2: 'Categorías, fotos y disponibilidad configurable, con facturación electrónica al SRI integrada.',
-      back: '02 — Menús Digitales', reverse: true,
+      desc2: 'Categorías, fotos y disponibilidad al instante, con facturación electrónica SRI.',
+      back: '02 — Menús Digitales', reverse: true, demoHref: 'https://giafoods.vercel.app/registro',
       features: [
         { icon: 'M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 013.75 9.375v-4.5zM3.75 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 01-1.125-1.125v-4.5zM13.5 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0113.5 9.375v-4.5z', title: 'Pedido por QR en la mesa', desc: 'El cliente escanea, arma su pedido y lo envía sin instalar nada.' },
         { icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z', title: 'Cocina en tiempo real', desc: 'Cada orden llega al instante a la pantalla de cocina, sin papeles.' },
@@ -181,8 +183,8 @@ const SERVICES_DATA: Record<Lang, ServiceItem[]> = {
     {
       label: 'Smart Digital Menus', title: 'Your menu, your brand,', titleGrad: 'zero-friction ordering',
       desc: 'QR ordering at the table: customers build their order and send it straight to the kitchen, no app download required.',
-      desc2: 'Categories, photos, and configurable availability, with built-in electronic invoicing.',
-      back: '02 — Digital Menus', reverse: true,
+      desc2: 'Categories, photos, and availability, with built-in electronic invoicing.',
+      back: '02 — Digital Menus', reverse: true, demoHref: 'https://giafoods.vercel.app/registro',
       features: [
         { icon: 'M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 013.75 9.375v-4.5zM3.75 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 01-1.125-1.125v-4.5zM13.5 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0113.5 9.375v-4.5z', title: 'QR ordering at the table', desc: 'Customers scan, order, and send — no app install, works on any device.' },
         { icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z', title: 'Kitchen connected in real time', desc: 'Every order hits the kitchen display instantly — no paper tickets, no transcription errors.' },
@@ -224,6 +226,15 @@ export default function Home() {
   const [flippedCard, setFlippedCard] = useState<number | null>(null)
   const [formStatus, setFormStatus] = useState<'idle' | 'loading' | 'success'>('idle')
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const testimonialsRef = useRef<HTMLDivElement>(null)
+
+  function scrollTestimonials(dir: number) {
+    const el = testimonialsRef.current
+    if (!el) return
+    const card = el.querySelector('div') as HTMLElement | null
+    const amount = (card ? card.offsetWidth : 320) + 20
+    el.scrollBy({ left: dir * amount, behavior: 'smooth' })
+  }
 
   const t = T[lang]
   const faqItems = FAQ_DATA[lang]
@@ -592,7 +603,12 @@ export default function Home() {
                       <span style={{ display: 'inline-block', fontSize: 11, color: '#00d4ff', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 14 }}>{svc.label}</span>
                       <h3 style={{ fontSize: 24, fontWeight: 900, marginBottom: 14, lineHeight: 1.2 }}>{svc.title}<br /><span className="gradient-text">{svc.titleGrad}</span></h3>
                       <p style={{ color: '#9aafc7', fontSize: 14, lineHeight: 1.65, marginBottom: 10 }}>{svc.desc}</p>
-                      <p style={{ color: 'rgba(154,175,199,0.6)', fontSize: 13, lineHeight: 1.65 }}>{svc.desc2}</p>
+                      <p style={{ color: 'rgba(154,175,199,0.6)', fontSize: 13, lineHeight: 1.65 }}>
+                        {svc.desc2}
+                        {svc.demoHref && (
+                          <> {' '}<a href={svc.demoHref} target="_blank" rel="noopener" onClick={(e) => e.stopPropagation()} style={{ color: '#00d4ff', fontWeight: 600, textDecoration: 'underline' }}>{t.svc.demo}</a></>
+                        )}
+                      </p>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, paddingTop: 14, borderTop: '1px solid rgba(0,212,255,0.08)' }}>
                       <span style={{ fontSize: 12, color: 'rgba(0,212,255,0.6)' }}>{t.svc.tapFwd}</span>
@@ -656,6 +672,11 @@ export default function Home() {
                   <h3 style={{ fontSize: 'clamp(26px,3vw,40px)', fontWeight: 900, marginBottom: 20, lineHeight: 1.2 }}>{svc.title}<br /><span className="gradient-text">{svc.titleGrad}</span></h3>
                   <p style={{ color: '#9aafc7', fontSize: 16, lineHeight: 1.75, marginBottom: 16 }}>{svc.desc}</p>
                   <p style={{ color: 'rgba(154,175,199,0.6)', fontSize: 14, lineHeight: 1.75 }}>{svc.desc2}</p>
+                  {svc.demoHref && (
+                    <a href={svc.demoHref} target="_blank" rel="noopener" style={{ display: 'inline-block', marginTop: 16, color: '#00d4ff', fontSize: 14, fontWeight: 600, textDecoration: 'underline' }}>
+                      {t.svc.demo}
+                    </a>
+                  )}
                 </div>
               </div>
             </div>
@@ -712,24 +733,33 @@ export default function Home() {
             <div className="badge" style={{ marginBottom: 24 }}><span className="badge-text">{t.test.badge}</span></div>
             <h2 style={{ fontSize: 'clamp(26px,3.5vw,40px)', fontWeight: 900 }}>{t.test.h2}</h2>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 20 }} className="testimonials-grid">
-            {[
-              { stars: '★★★★★', text: '"G.I.A. Solutions transformó nuestra presencia digital. La página web convierte el doble que la anterior, y el chatbot maneja el 80% de nuestras consultas."', initials: 'GE', color: '0e1f3a/00d4ff', name: 'Dra. Gabriela Escobar', href: 'https://dragabrielaescobar.com/' },
-              { stars: '★★★★★', text: '"Gracias GIA Solutions por ayudarme a crear mi página web y además optimizar mi campaña de marketing; me ha ayudado a llegar a clientes de otros países."', initials: 'DS', color: '0e1f3a/00fff7', name: 'Diego Silva', href: 'https://diegofitcoach.vercel.app/', highlight: true },
-              { stars: '★★★★★', text: '"La página web que GIA Solutions hizo para mi consultorio me permitió agendar más citas de manera online y así pude dejar de hacerlo yo misma, lo cual me ha ahorrado mucho tiempo; además me la entregaron súper rápido."', initials: 'NG', color: '132540/00d4ff', name: 'Abg. Nicole García', href: 'https://webng-eight.vercel.app/' },
-            ].map((t2, i) => (
-              <div key={i} className="feature-card" style={{ borderRadius: 20, padding: 28, ...(t2.highlight ? { borderColor: 'rgba(0,212,255,0.25)' } : {}) }}>
-                <div style={{ color: '#00d4ff', fontSize: 13, marginBottom: 16 }}>{t2.stars}</div>
-                <p style={{ color: 'rgba(154,175,199,0.85)', fontSize: 14, lineHeight: 1.75, marginBottom: 24 }}>{t2.text}</p>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={`https://placehold.co/40x40/${t2.color}?text=${t2.initials}`} style={{ width: 40, height: 40, borderRadius: '50%', border: '1px solid rgba(0,212,255,0.2)' }} alt={t2.name} />
-                  <div>
-                    <a href={t2.href} target="_blank" rel="noopener" style={{ color: '#fff', fontWeight: 600, fontSize: 13, textDecoration: 'none', borderBottom: '1px solid rgba(0,212,255,0.4)' }}>{t2.name}</a>
+          <div style={{ position: 'relative' }} className="testimonials-wrap">
+            <button className="testimonials-arrow prev" onClick={() => scrollTestimonials(-1)} aria-label={t.test.prev}>
+              <svg width="16" height="16" fill="none" stroke="#00d4ff" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" /></svg>
+            </button>
+            <div ref={testimonialsRef} className="testimonials-grid">
+              {[
+                { stars: '★★★★★', text: '"G.I.A. Solutions transformó nuestra presencia digital. La página web convierte el doble que la anterior, y el chatbot maneja el 80% de nuestras consultas."', initials: 'GE', color: '0e1f3a/00d4ff', name: 'Dra. Gabriela Escobar', href: 'https://dragabrielaescobar.com/' },
+                { stars: '★★★★★', text: '"Gracias GIA Solutions por ayudarme a crear mi página web y además optimizar mi campaña de marketing; me ha ayudado a llegar a clientes de otros países."', initials: 'DS', color: '0e1f3a/00fff7', name: 'Diego Silva', href: 'https://diegofitcoach.vercel.app/', highlight: true },
+                { stars: '★★★★★', text: '"La página web que GIA Solutions hizo para mi consultorio me permitió agendar más citas de manera online y así pude dejar de hacerlo yo misma, lo cual me ha ahorrado mucho tiempo; además me la entregaron súper rápido."', initials: 'NG', color: '132540/00d4ff', name: 'Abg. Nicole García', href: 'https://webng-eight.vercel.app/' },
+                { stars: '★★★★★', text: '"Gracias por mi tienda virtual, de verdad superaron mis expectativas, me asesoraron durante todo el proceso y me ha ayudado a tener una mejor organización de mis productos."', initials: 'AV', color: '0e1f3a/00d4ff', name: 'Ana Viteri — Inner Path', href: 'https://www.innerpathayurveda.com/' },
+              ].map((t2, i) => (
+                <div key={i} className="feature-card" style={{ borderRadius: 20, padding: 28, ...(t2.highlight ? { borderColor: 'rgba(0,212,255,0.25)' } : {}) }}>
+                  <div style={{ color: '#00d4ff', fontSize: 13, marginBottom: 16 }}>{t2.stars}</div>
+                  <p style={{ color: 'rgba(154,175,199,0.85)', fontSize: 14, lineHeight: 1.75, marginBottom: 24 }}>{t2.text}</p>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={`https://placehold.co/40x40/${t2.color}?text=${t2.initials}`} style={{ width: 40, height: 40, borderRadius: '50%', border: '1px solid rgba(0,212,255,0.2)' }} alt={t2.name} />
+                    <div>
+                      <a href={t2.href} target="_blank" rel="noopener" style={{ color: '#fff', fontWeight: 600, fontSize: 13, textDecoration: 'none', borderBottom: '1px solid rgba(0,212,255,0.4)' }}>{t2.name}</a>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+            <button className="testimonials-arrow next" onClick={() => scrollTestimonials(1)} aria-label={t.test.next}>
+              <svg width="16" height="16" fill="none" stroke="#00d4ff" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" /></svg>
+            </button>
           </div>
         </div>
       </section>
