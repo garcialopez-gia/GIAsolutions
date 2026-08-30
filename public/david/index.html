@@ -154,7 +154,7 @@ body{
 @keyframes rise{to{opacity:1;transform:none}}
 .d1{animation-delay:.55s}.d2{animation-delay:.66s}
 .d3{animation-delay:1.30s}.d4{animation-delay:1.40s}.d5{animation-delay:1.50s}
-.d6{animation-delay:1.62s}.d7{animation-delay:1.72s}
+.d6{animation-delay:1.62s}.d7{animation-delay:1.72s}.d8{animation-delay:1.82s}
 
 /* ── Acciones ─────────────────────────────────────── */
 .actions{margin-top:36px;display:flex;flex-direction:column;gap:10px}
@@ -188,6 +188,15 @@ body{
 }
 .btn-primary svg{stroke:var(--cyan-soft)}
 .btn-primary:active{background:linear-gradient(135deg,rgba(53,198,232,.30) 0%,rgba(53,198,232,.12) 100%)}
+
+.btn-wallet{
+  background:rgba(255,255,255,.055);
+  border-color:rgba(232,236,241,.24);
+  color:var(--bone);
+}
+.btn-wallet svg{stroke:#e8ecf1}
+.btn-wallet:active{background:rgba(255,255,255,.09)}
+.btn-wallet[hidden]{display:none}
 
 .row{display:flex;gap:10px}
 .row .btn{flex:1;justify-content:center;padding:14px 6px;gap:8px;font-size:11.5px;letter-spacing:.05em;color:var(--muted)}
@@ -258,7 +267,15 @@ body{
         <svg class="chev" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
       </a>
 
-      <div class="row rise d5">
+      <a class="btn btn-wallet rise d5" id="wallet" hidden
+         href="https://pay.google.com/gp/v/save/eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJpbnZpdGFjaW9uZXNAaW52aXRhY2lvbmVzLTUwNzEyMS5pYW0uZ3NlcnZpY2VhY2NvdW50LmNvbSIsImF1ZCI6Imdvb2dsZSIsInR5cCI6InNhdmV0b3dhbGxldCIsIm9yaWdpbnMiOlsiaHR0cHM6Ly9naS1hc29sdXRpb25zLnZlcmNlbC5hcHAiXSwicGF5bG9hZCI6eyJnZW5lcmljT2JqZWN0cyI6W3siaWQiOiIzMzg4MDAwMDAwMDIzMTg4MDc1LnRhcmpldGFfZGF2aWRfZ2FyY2lhX3YxIiwiY2xhc3NJZCI6IjMzODgwMDAwMDAwMjMxODgwNzUudGFyamV0YV9kYXZpZF9nYXJjaWEifV19LCJpYXQiOjE3ODgxMjkyMDh9.Q-rGAj5RtA7GrWaWMtQ74fakEUqTHGyy0LWhxDVpOVXRHpknfYtItZVKI8ZKuBnjtJXvftWfo9yMaVBuExSFEPmvNHwERv8X-wKLRnhQ3nSIu_90u140h4_8g8BX6w8s89-7X49Z1kBgjjGzuqwzOO4B7pGC2-trztWBjd7mPUFjLoAi2jclLVXfzyES6hwGw0glTQ437svm2OUke_2e40FQ3NzSNQGvQJI1p3f5TGoIDvdDNAz1gi_KSTtkterc6G7gqhSSgZYRo-uITAHr_bVG3c7iyd1QNSMTsx225GfihjKyX4Bzon0NO1dgtDMqEvCvy_LJgbMt1-qhYhRmsg"
+         target="_blank" rel="noopener" data-action="wallet">
+        <svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="3"/><path d="M2.5 10h19"/><circle cx="17.5" cy="14.5" r="1.3"/></svg>
+        Añadir a Google Wallet
+        <svg class="chev" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
+
+      <div class="row rise d6">
         <a class="btn" href="https://wa.me/593983667449?text=Hola%20David%2C%20escane%C3%A9%20tu%20tarjeta" target="_blank" rel="noopener" data-action="whatsapp">
           <svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-11.9 7.7L3 21l1.9-5.9A8.4 8.4 0 1 1 21 11.5z"/></svg>
           WhatsApp
@@ -275,7 +292,7 @@ body{
 
     </nav>
 
-    <section class="services rise d6">
+    <section class="services rise d7">
       <p class="services-label">Servicios</p>
       <ul>
         <li>Ecosistemas Digitales &amp; Diseño web</li>
@@ -285,7 +302,7 @@ body{
       </ul>
     </section>
 
-    <footer class="foot rise d7">
+    <footer class="foot rise d8">
       <i></i> G.I.A. Solutions · Ecuador
     </footer>
 
@@ -298,6 +315,13 @@ body{
 (function () {
   var src = new URLSearchParams(location.search).get('s') || 'directo';
   document.documentElement.dataset.src = src;
+
+  /* Google Wallet solo admite pases genéricos en Android. En iPhone el
+     botón se queda oculto en vez de llevar a una pantalla que no sirve. */
+  if (/Android/i.test(navigator.userAgent)) {
+    document.getElementById('wallet').hidden = false;
+  }
+
   document.querySelectorAll('[data-action]').forEach(function (el) {
     el.addEventListener('click', function () {
       // navigator.sendBeacon('/api/track', JSON.stringify({a: el.dataset.action, s: src}));
