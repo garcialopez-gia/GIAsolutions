@@ -12,6 +12,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
+      // Tarjeta de presentación digital (public/david/, servida vía rewrite)
+      url: `${SITE_URL}/david`,
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.5,
+    },
+    {
       url: `${SITE_URL}/politica-de-privacidad.html`,
       lastModified,
       changeFrequency: 'yearly',
