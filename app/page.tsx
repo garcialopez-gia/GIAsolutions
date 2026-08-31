@@ -32,7 +32,7 @@ const T = {
       cta1: 'Solicitar diagnóstico gratuito', cta2: 'Explorar más',
       trust: 'Sin tarjeta de crédito · Respuesta en 24h',
     },
-    test: { badge: 'Testimonios', h2: 'Lo que dicen nuestros clientes', prev: 'Anterior', next: 'Siguiente' },
+    test: { badge: 'Testimonios', h2: 'Lo que dicen nuestros clientes', prev: 'Anterior', next: 'Siguiente', review: 'Califícanos en Google' },
     faqSec: { badge: 'Preguntas frecuentes', h2: 'Todo lo que necesitas saber' },
     contact: {
       badge: 'Diagnóstico gratuito',
@@ -80,7 +80,7 @@ const T = {
       cta1: 'Book your free strategy call', cta2: 'See our work',
       trust: 'No credit card required · Response within 24h',
     },
-    test: { badge: 'Client Stories', h2: 'What our clients are saying', prev: 'Previous', next: 'Next' },
+    test: { badge: 'Client Stories', h2: 'What our clients are saying', prev: 'Previous', next: 'Next', review: 'Rate us on Google' },
     faqSec: { badge: 'Got questions?', h2: 'Everything you need to know' },
     contact: {
       badge: 'Free Growth Audit',
@@ -743,6 +743,12 @@ export default function Home() {
             <button className="testimonials-arrow next" onClick={() => scrollTestimonials(1)} aria-label={t.test.next}>
               <svg width="16" height="16" fill="none" stroke="#00d4ff" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" /></svg>
             </button>
+          </div>
+          <div style={{ textAlign: 'center', marginTop: 40 }}>
+            <a href="https://g.page/r/CUHVSGBpoIXpECE/review" target="_blank" rel="noopener" className="btn-ghost" style={{ padding: '14px 32px', borderRadius: 12, fontSize: 14, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 10 }}>
+              <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.52 12.27c0-.85-.08-1.67-.22-2.45H12v4.63h6.47a5.54 5.54 0 01-2.4 3.63v3h3.88c2.27-2.09 3.57-5.17 3.57-8.81z"/><path fill="#34A853" d="M12 24c3.24 0 5.96-1.07 7.95-2.92l-3.88-3a7.15 7.15 0 01-10.65-3.76H1.4v3.1A12 12 0 0012 24z"/><path fill="#FBBC05" d="M5.42 14.32a7.2 7.2 0 010-4.64v-3.1H1.4a12 12 0 000 10.84z"/><path fill="#EA4335" d="M12 4.75c1.76 0 3.34.6 4.59 1.79l3.44-3.44C17.95 1.19 15.24 0 12 0A12 12 0 001.4 6.58l4.02 3.1A7.15 7.15 0 0112 4.75z"/></svg>
+              {t.test.review}
+            </a>
           </div>
         </div>
       </section>
