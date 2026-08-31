@@ -50,8 +50,9 @@ export const metadata: Metadata = {
       'max-video-preview': -1,
     },
   },
-  // Pega aquí el código de Google Search Console cuando verifiques el sitio:
-  // verification: { google: 'tu-codigo-de-verificacion' },
+  verification: {
+    google: '4I255ygqhWRmGQoZtlFIDiKNnPhZt0aroFWCn6r0GyI',
+  },
 }
 
 export const viewport: Viewport = {
