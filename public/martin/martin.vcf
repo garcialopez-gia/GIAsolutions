@@ -1,0 +1,14 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Guijarro;Martín;;;;
+FN:Martín Guijarro
+ORG:G.I.A. Solutions
+TITLE:Desarrollador
+TEL;TYPE=CELL,VOICE:+593995002996
+EMAIL;TYPE=INTERNET,WORK:giasolutions.ec@outlook.com
+URL:https://gi-asolutions.vercel.app/
+URL;TYPE=Instagram:https://instagram.com/giasolutions.ec
+X-SOCIALPROFILE;TYPE=instagram:https://instagram.com/giasolutions.ec
+ADR;TYPE=WORK:;;;;;;Ecuador
+NOTE:Ecosistemas Digitales & Diseño web · Menús Inteligentes & E-commerce · Plataformas Médicas · Invitaciones Digitales Bespoke. Instagram: @giasolutions.ec
+END:VCARD
