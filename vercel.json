@@ -4,11 +4,27 @@
   "outputDirectory": ".next",
   "installCommand": "npm install",
   "rewrites": [
-    { "source": "/david", "destination": "/david/index.html" }
+    { "source": "/david", "destination": "/david/index.html" },
+    { "source": "/martin", "destination": "/martin/index.html" },
+    { "source": "/gabriela", "destination": "/gabriela/index.html" }
   ],
   "headers": [
     {
       "source": "/david/david.vcf",
+      "headers": [
+        { "key": "Content-Type", "value": "text/vcard; charset=utf-8" },
+        { "key": "Cache-Control", "value": "public, max-age=3600" }
+      ]
+    },
+    {
+      "source": "/martin/martin.vcf",
+      "headers": [
+        { "key": "Content-Type", "value": "text/vcard; charset=utf-8" },
+        { "key": "Cache-Control", "value": "public, max-age=3600" }
+      ]
+    },
+    {
+      "source": "/gabriela/gabriela.vcf",
       "headers": [
         { "key": "Content-Type", "value": "text/vcard; charset=utf-8" },
         { "key": "Cache-Control", "value": "public, max-age=3600" }
