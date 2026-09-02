@@ -270,13 +270,21 @@ body{
       </a>
 
 
-      <a class="btn btn-resena rise d5" href="https://g.page/r/CUHVSGBpoIXpEBM/review" target="_blank" rel="noopener" data-action="resena">
+      <a class="btn btn-wallet rise d5" id="wallet" hidden
+         href="https://pay.google.com/gp/v/save/eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJpbnZpdGFjaW9uZXNAaW52aXRhY2lvbmVzLTUwNzEyMS5pYW0uZ3NlcnZpY2VhY2NvdW50LmNvbSIsImF1ZCI6Imdvb2dsZSIsInR5cCI6InNhdmV0b3dhbGxldCIsIm9yaWdpbnMiOlsiaHR0cHM6Ly9naS1hc29sdXRpb25zLnZlcmNlbC5hcHAiXSwicGF5bG9hZCI6eyJnZW5lcmljT2JqZWN0cyI6W3siaWQiOiIzMzg4MDAwMDAwMDIzMTg4MDc1LnRhcmpldGFfbWFydGluX2d1aWphcnJvX3YxIiwiY2xhc3NJZCI6IjMzODgwMDAwMDAwMjMxODgwNzUudGFyamV0YV9tYXJ0aW5fZ3VpamFycm8ifV19LCJpYXQiOjE3ODgzNzE1OTN9.YjT1zwTdu8J8Z4z5iOXHSzpSPVk8lbzV8SiBruY95MU4wdFiPfsGcFsCFhrl6vvL72zWUMcKO39Km9zAra0U7U_NHjJlsdI_jaJPRUS9SI3iGNB_d4G1UBLLFIZaYECDbJo9GuNsqcg0I7QlvrCh-ywfBnMrP1Q_H3eEz20OxLPai0sA67aNvFB31kx7ua3O66moKRvcYamQqO7vqhnrVf6m3Qepc4XgWbOTaabzZEvZOJBFVs0VCVKbYV_xzNqeAZ3KL2fTSWg1EEKlzOsUrNhBZBi_nQ2nduOHM_FTsLe2W6dovkVQJNtJhcbBT0iwjx-jRXwKyjxUPrudL-oUPA"
+         target="_blank" rel="noopener" data-action="wallet">
+        <svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="3"/><path d="M2.5 10h19"/><circle cx="17.5" cy="14.5" r="1.3"/></svg>
+        Añadir a Google Wallet
+        <svg class="chev" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
+
+      <a class="btn btn-resena rise d6" href="https://g.page/r/CUHVSGBpoIXpEBM/review" target="_blank" rel="noopener" data-action="resena">
         <svg viewBox="0 0 24 24"><path d="M12 3.2l2.7 5.5 6 .9-4.35 4.24 1.03 6-5.38-2.83L6.6 19.84l1.03-6L3.28 9.6l6.02-.9z"/></svg>
         Dejar una reseña en Google
         <svg class="chev" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
       </a>
 
-      <div class="row rise d6">
+      <div class="row rise d7">
         <a class="btn" href="https://wa.me/593995002996?text=Hola%20Mart%C3%ADn%2C%20escane%C3%A9%20tu%20tarjeta" target="_blank" rel="noopener" data-action="whatsapp">
           <svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-11.9 7.7L3 21l1.9-5.9A8.4 8.4 0 1 1 21 11.5z"/></svg>
           WhatsApp
@@ -293,7 +301,7 @@ body{
 
     </nav>
 
-    <section class="services rise d7">
+    <section class="services rise d8">
       <p class="services-label">Servicios</p>
       <ul>
         <li>Ecosistemas Digitales &amp; Diseño web</li>
@@ -303,7 +311,7 @@ body{
       </ul>
     </section>
 
-    <footer class="foot rise d8">
+    <footer class="foot rise d9">
       <i></i> G.I.A. Solutions · Ecuador
     </footer>
 
@@ -316,6 +324,12 @@ body{
 (function () {
   var src = new URLSearchParams(location.search).get('s') || 'directo';
   document.documentElement.dataset.src = src;
+
+  /* Google Wallet solo admite pases genéricos en Android. En iPhone el
+     botón se queda oculto en vez de llevar a una pantalla que no sirve. */
+  if (/Android/i.test(navigator.userAgent)) {
+    document.getElementById('wallet').hidden = false;
+  }
 
   document.querySelectorAll('[data-action]').forEach(function (el) {
     el.addEventListener('click', function () {
