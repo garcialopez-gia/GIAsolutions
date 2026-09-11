@@ -75,6 +75,36 @@ body{
 
 .inner{position:relative;z-index:1}
 
+/* ── Selector de idioma ───────────────────────────── */
+.lang-toggle{
+  position:absolute;
+  top:calc(env(safe-area-inset-top) + 14px);
+  right:26px;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  background:rgba(53,198,232,.07);
+  border:1px solid rgba(53,198,232,.22);
+  border-radius:8px;
+  overflow:hidden;
+}
+.lang-toggle button{
+  appearance:none;
+  -webkit-appearance:none;
+  background:transparent;
+  border:none;
+  padding:6px 10px;
+  font-family:var(--sans);
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.06em;
+  color:rgba(238,244,248,.4);
+  cursor:pointer;
+  transition:background .18s ease, color .18s ease;
+}
+.lang-toggle button+button{border-left:1px solid rgba(53,198,232,.22)}
+.lang-toggle button.active{background:rgba(53,198,232,.16);color:var(--cyan-soft)}
+
 /* ── Cabecera: logo │◆ identidad ──────────────────── */
 .head{
   display:flex;
@@ -121,7 +151,7 @@ body{
 }
 @keyframes gem{to{transform:translateY(-50%) rotate(45deg) scale(1)}}
 
-.identity{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;justify-content:center;padding:6px 0}
+.identity{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;justify-content:center;padding:6px 78px 6px 0}
 .pre{
   font-family:var(--serif);
   font-style:italic;
@@ -131,6 +161,7 @@ body{
   line-height:1;
   letter-spacing:.01em;
 }
+.pre:empty{display:none}
 .name{
   font-family:var(--serif);
   font-size:clamp(28px,8.4vw,35px);
@@ -239,6 +270,11 @@ body{
 <main class="card">
   <div class="inner">
 
+    <div class="lang-toggle" role="group" aria-label="Idioma / Language">
+      <button type="button" data-lang="es" class="active">ES</button>
+      <button type="button" data-lang="en">EN</button>
+    </div>
+
     <header class="head">
 
       <div class="logo">
@@ -249,9 +285,9 @@ body{
       <div class="axis"><i></i></div>
 
       <div class="identity">
-        <p class="pre rise d1">Ing.</p>
+        <p class="pre rise d1" data-i18n="pre">Ing.</p>
         <h1 class="name rise d1">David García</h1>
-        <p class="role rise d2">Consultor · G.I.A. Solutions</p>
+        <p class="role rise d2" data-i18n="role">Consultor · G.I.A. Solutions</p>
       </div>
 
     </header>
@@ -260,13 +296,13 @@ body{
 
       <a class="btn btn-primary rise d3" href="/david/david.vcf" data-action="contacto">
         <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>
-        Guardar contacto
+        <span data-i18n="contact">Guardar contacto</span>
         <svg class="chev" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
       </a>
 
       <a class="btn rise d4" href="https://instagram.com/giasolutions.ec" target="_blank" rel="noopener" data-action="instagram">
         <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6" fill="currentColor" stroke="none"/></svg>
-        Seguir en Instagram
+        <span data-i18n="instagram">Seguir en Instagram</span>
         <svg class="chev" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
       </a>
 
@@ -274,24 +310,24 @@ body{
          href="https://pay.google.com/gp/v/save/eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJpbnZpdGFjaW9uZXNAaW52aXRhY2lvbmVzLTUwNzEyMS5pYW0uZ3NlcnZpY2VhY2NvdW50LmNvbSIsImF1ZCI6Imdvb2dsZSIsInR5cCI6InNhdmV0b3dhbGxldCIsIm9yaWdpbnMiOlsiaHR0cHM6Ly9naS1hc29sdXRpb25zLnZlcmNlbC5hcHAiXSwicGF5bG9hZCI6eyJnZW5lcmljT2JqZWN0cyI6W3siaWQiOiIzMzg4MDAwMDAwMDIzMTg4MDc1LnRhcmpldGFfZGF2aWRfZ2FyY2lhX3YxIiwiY2xhc3NJZCI6IjMzODgwMDAwMDAwMjMxODgwNzUudGFyamV0YV9kYXZpZF9nYXJjaWEifV19LCJpYXQiOjE3ODgxMjkyMDh9.Q-rGAj5RtA7GrWaWMtQ74fakEUqTHGyy0LWhxDVpOVXRHpknfYtItZVKI8ZKuBnjtJXvftWfo9yMaVBuExSFEPmvNHwERv8X-wKLRnhQ3nSIu_90u140h4_8g8BX6w8s89-7X49Z1kBgjjGzuqwzOO4B7pGC2-trztWBjd7mPUFjLoAi2jclLVXfzyES6hwGw0glTQ437svm2OUke_2e40FQ3NzSNQGvQJI1p3f5TGoIDvdDNAz1gi_KSTtkterc6G7gqhSSgZYRo-uITAHr_bVG3c7iyd1QNSMTsx225GfihjKyX4Bzon0NO1dgtDMqEvCvy_LJgbMt1-qhYhRmsg"
          target="_blank" rel="noopener" data-action="wallet">
         <svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="3"/><path d="M2.5 10h19"/><circle cx="17.5" cy="14.5" r="1.3"/></svg>
-        Añadir a Google Wallet
+        <span data-i18n="wallet">Añadir a Google Wallet</span>
         <svg class="chev" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
       </a>
 
       <a class="btn btn-resena rise d6" href="https://g.page/r/CUHVSGBpoIXpEBM/review" target="_blank" rel="noopener" data-action="resena">
         <svg viewBox="0 0 24 24"><path d="M12 3.2l2.7 5.5 6 .9-4.35 4.24 1.03 6-5.38-2.83L6.6 19.84l1.03-6L3.28 9.6l6.02-.9z"/></svg>
-        Dejar una reseña en Google
+        <span data-i18n="review">Dejar una reseña en Google</span>
         <svg class="chev" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
       </a>
 
       <div class="row rise d7">
         <a class="btn" href="/" data-action="sitio-web">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14.5 14.5 0 0 1 0 18 14.5 14.5 0 0 1 0-18z"/></svg>
-          Sitio web
+          <span data-i18n="site">Sitio web</span>
         </a>
         <a class="btn" href="https://gia-cards.vercel.app/ejemplos" target="_blank" rel="noopener" data-action="catalogo">
           <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></svg>
-          Catálogo
+          <span data-i18n="catalog">Catálogo</span>
         </a>
       </div>
 
@@ -302,7 +338,7 @@ body{
         </a>
         <a class="btn" href="tel:+593983667449" data-action="llamar">
           <svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
-          Llamar
+          <span data-i18n="call">Llamar</span>
         </a>
         <a class="btn" href="mailto:giasolutions.ec@outlook.com" data-action="email">
           <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2.5"/><path d="M2.5 6.5L12 13l9.5-6.5"/></svg>
@@ -313,12 +349,12 @@ body{
     </nav>
 
     <section class="services rise d9">
-      <p class="services-label">Servicios</p>
+      <p class="services-label" data-i18n="servicesLabel">Servicios</p>
       <ul>
-        <li>Ecosistemas Digitales &amp; Diseño web</li>
-        <li>Menús Inteligentes &amp; E-commerce</li>
-        <li>Plataformas Médicas</li>
-        <li>Invitaciones Digitales Bespoke</li>
+        <li data-i18n="svc1">Ecosistemas Digitales &amp; Diseño web</li>
+        <li data-i18n="svc2">Menús Inteligentes &amp; E-commerce</li>
+        <li data-i18n="svc3">Plataformas Médicas</li>
+        <li data-i18n="svc4">Invitaciones Digitales Bespoke</li>
       </ul>
     </section>
 
@@ -346,6 +382,62 @@ body{
     el.addEventListener('click', function () {
       // navigator.sendBeacon('/api/track', JSON.stringify({a: el.dataset.action, s: src}));
     });
+  });
+})();
+</script>
+
+<script>
+/* Traducción del contenido visible. Los enlaces (WhatsApp, tel, mailto,
+   reseña) no cambian, solo las etiquetas — igual que en gia-cards. */
+(function () {
+  var I18N = {
+    es: {
+      pre: 'Ing.',
+      role: 'Consultor · G.I.A. Solutions',
+      contact: 'Guardar contacto',
+      instagram: 'Seguir en Instagram',
+      wallet: 'Añadir a Google Wallet',
+      review: 'Dejar una reseña en Google',
+      site: 'Sitio web',
+      catalog: 'Catálogo',
+      call: 'Llamar',
+      servicesLabel: 'Servicios',
+      svc1: 'Ecosistemas Digitales & Diseño web',
+      svc2: 'Menús Inteligentes & E-commerce',
+      svc3: 'Plataformas Médicas',
+      svc4: 'Invitaciones Digitales Bespoke'
+    },
+    en: {
+      pre: '',
+      role: 'Consultant · G.I.A. Solutions',
+      contact: 'Save Contact',
+      instagram: 'Follow on Instagram',
+      wallet: 'Add to Google Wallet',
+      review: 'Leave a Google Review',
+      site: 'Website',
+      catalog: 'Catalog',
+      call: 'Call',
+      servicesLabel: 'Services',
+      svc1: 'Digital Ecosystems & Web Design',
+      svc2: 'Smart Menus & E-commerce',
+      svc3: 'Medical Platforms',
+      svc4: 'Bespoke Digital Invitations'
+    }
+  };
+
+  function setLang(lang) {
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+      var key = el.getAttribute('data-i18n');
+      if (I18N[lang][key] !== undefined) el.textContent = I18N[lang][key];
+    });
+    document.querySelectorAll('.lang-toggle button').forEach(function (b) {
+      b.classList.toggle('active', b.dataset.lang === lang);
+    });
+  }
+
+  document.querySelectorAll('.lang-toggle button').forEach(function (b) {
+    b.addEventListener('click', function () { setLang(b.dataset.lang); });
   });
 })();
 </script>
