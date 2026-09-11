@@ -77,12 +77,10 @@ body{
 
 /* ── Selector de idioma ───────────────────────────── */
 .lang-toggle{
-  position:absolute;
-  top:calc(env(safe-area-inset-top) + 14px);
-  right:26px;
-  z-index:2;
   display:flex;
   align-items:center;
+  width:fit-content;
+  margin:0 0 16px auto;
   background:rgba(53,198,232,.07);
   border:1px solid rgba(53,198,232,.22);
   border-radius:8px;
@@ -151,7 +149,7 @@ body{
 }
 @keyframes gem{to{transform:translateY(-50%) rotate(45deg) scale(1)}}
 
-.identity{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;justify-content:center;padding:6px 78px 6px 0}
+.identity{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;justify-content:center;padding:6px 0}
 .pre{
   font-family:var(--serif);
   font-style:italic;
