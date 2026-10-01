@@ -84,8 +84,8 @@ export default function ChatCard({ lang = 'es' }: ChatCardProps) {
       // Handle structured error responses from the API
       if (!res.ok) {
         let friendlyMsg = lang === 'en'
-          ? 'Sorry, the assistant is unavailable right now. You can reach us on WhatsApp: +593 995 002 996'
-          : 'Lo siento, el asistente no está disponible ahora. Puedes contactarnos por WhatsApp: +593 995 002 996'
+          ? 'Sorry, the assistant is unavailable right now. You can reach us on WhatsApp: +593 983 667 449'
+          : 'Lo siento, el asistente no está disponible ahora. Puedes contactarnos por WhatsApp: +593 983 667 449'
         try {
           const errData = await res.json()
           if (errData?.error) friendlyMsg = errData.error

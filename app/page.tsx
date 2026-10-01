@@ -3,8 +3,15 @@
 import { useState, useEffect, useRef } from 'react'
 import ChatCard from './components/ChatCard'
 import { FAQ_DATA } from './data/faq'
+import { SITE } from './lib/site'
 
 const WA_PATH = 'M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z'
+
+function GoogleIcon({ size }: { size: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.52 12.27c0-.85-.08-1.67-.22-2.45H12v4.63h6.47a5.54 5.54 0 01-2.4 3.63v3h3.88c2.27-2.09 3.57-5.17 3.57-8.81z"/><path fill="#34A853" d="M12 24c3.24 0 5.96-1.07 7.95-2.92l-3.88-3a7.15 7.15 0 01-10.65-3.76H1.4v3.1A12 12 0 0012 24z"/><path fill="#FBBC05" d="M5.42 14.32a7.2 7.2 0 010-4.64v-3.1H1.4a12 12 0 000 10.84z"/><path fill="#EA4335" d="M12 4.75c1.76 0 3.34.6 4.59 1.79l3.44-3.44C17.95 1.19 15.24 0 12 0A12 12 0 001.4 6.58l4.02 3.1A7.15 7.15 0 0112 4.75z"/></svg>
+  )
+}
 
 type Lang = 'es' | 'en'
 
@@ -26,13 +33,7 @@ const T = {
       tapFwd: 'Toca para ver detalles', tapBack: 'Toca para volver',
       demo: 'Solicita tu demo gratis',
     },
-    proc: {
-      badge: 'Nuestro Proceso', h2a: 'Supera a todos.', h2b: 'Empieza ahora.',
-      desc: 'En menos de 48 horas tendrás un diagnóstico completo y un plan de acción personalizado.',
-      cta1: 'Solicitar diagnóstico gratuito', cta2: 'Explorar más',
-      trust: 'Sin tarjeta de crédito · Respuesta en 24h',
-    },
-    test: { badge: 'Testimonios', h2: 'Lo que dicen nuestros clientes', prev: 'Anterior', next: 'Siguiente', review: 'Califícanos en Google' },
+    test: { badge: 'Testimonios', h2: 'Lo que dicen nuestros clientes', prev: 'Anterior', next: 'Siguiente', review: 'Califícanos en Google', googleReview: 'Reseña en Google' },
     faqSec: { badge: 'Preguntas frecuentes', h2: 'Todo lo que necesitas saber' },
     contact: {
       badge: 'Diagnóstico gratuito',
@@ -74,13 +75,7 @@ const T = {
       tapFwd: 'Tap to see details', tapBack: 'Tap to go back',
       demo: 'Request your free demo',
     },
-    proc: {
-      badge: 'How It Works', h2a: 'Leave competitors behind.', h2b: 'Start today.',
-      desc: 'Within 48 hours, you\'ll have a full growth audit and a custom action plan ready to execute.',
-      cta1: 'Book your free strategy call', cta2: 'See our work',
-      trust: 'No credit card required · Response within 24h',
-    },
-    test: { badge: 'Client Stories', h2: 'What our clients are saying', prev: 'Previous', next: 'Next', review: 'Rate us on Google' },
+    test: { badge: 'Client Stories', h2: 'What our clients are saying', prev: 'Previous', next: 'Next', review: 'Rate us on Google', googleReview: 'Google review' },
     faqSec: { badge: 'Got questions?', h2: 'Everything you need to know' },
     contact: {
       badge: 'Free Growth Audit',
@@ -190,20 +185,6 @@ const SERVICES_DATA: Record<Lang, ServiceItem[]> = {
   ],
 }
 
-// ─── PROCESS DATA ─────────────────────────────────────────────────────────────
-const PROCESS_DATA: Record<Lang, { n: string; icon: string; title: string; desc: string; highlight: boolean }[]> = {
-  es: [
-    { n: '01', icon: 'M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z', title: 'Diagnóstico', desc: 'Analizamos tu situación digital actual: competidores, audiencias, campañas y oportunidades de crecimiento.', highlight: false },
-    { n: '02', icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4', title: 'Estrategia personalizada', desc: 'Diseñamos un plan a medida según tus objetivos, presupuesto y mercado. Sin soluciones genéricas: todo para tu negocio.', highlight: true },
-    { n: '03', icon: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6', title: 'Ejecución y escalado', desc: 'Implementamos, medimos y optimizamos en tiempo real. Tú te enfocas en tu negocio; nosotros hacemos crecer tu audiencia.', highlight: false },
-  ],
-  en: [
-    { n: '01', icon: 'M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z', title: 'Discovery', desc: 'We dig into your digital landscape — competitors, audience behavior, active campaigns, and the growth opportunities you\'re currently missing.', highlight: false },
-    { n: '02', icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4', title: 'Custom strategy', desc: 'We build a tailored growth plan around your goals, budget, and market. No templates, no guesswork — everything specific to your business.', highlight: true },
-    { n: '03', icon: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6', title: 'Launch & optimize', desc: 'We execute, track every metric, and iterate in real time. You run your business — we grow your pipeline.', highlight: false },
-  ],
-}
-
 export default function Home() {
   const [lang, setLang] = useState<Lang>('es')
   const [menuOpen, setMenuOpen] = useState(false)
@@ -224,7 +205,6 @@ export default function Home() {
   const t = T[lang]
   const faqItems = FAQ_DATA[lang]
   const services = SERVICES_DATA[lang]
-  const processSteps = PROCESS_DATA[lang]
 
   useEffect(() => {
     setOpenFaq(null)
@@ -669,48 +649,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── PROCESO ────────────────────────────────────────────────────────── */}
-      <section id="proceso" style={{ padding: '96px 0', position: 'relative' }} className="grid-bg">
-        <div className="radial-glow" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', opacity: 0.4 }} />
-        <div style={{ position: 'relative', maxWidth: 1280, margin: '0 auto', padding: '0 32px' }}>
-          <div style={{ textAlign: 'center', marginBottom: 64 }}>
-            <div className="badge" style={{ marginBottom: 24 }}><span className="badge-text">{t.proc.badge}</span></div>
-            <h2 style={{ fontSize: 'clamp(28px,4vw,48px)', fontWeight: 900, marginBottom: 20, lineHeight: 1.2 }}>
-              {t.proc.h2a}<br /><span className="gradient-text">{t.proc.h2b}</span>
-            </h2>
-            <p style={{ color: '#9aafc7', fontSize: 17, maxWidth: 480, margin: '0 auto', lineHeight: 1.7 }}>{t.proc.desc}</p>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 24, marginBottom: 64 }} className="process-grid">
-            {processSteps.map(p => (
-              <div key={p.n} className="feature-card" style={{ borderRadius: 20, padding: 32, position: 'relative', ...(p.highlight ? { borderColor: 'rgba(0,212,255,0.25)' } : {}) }}>
-                <div style={{ position: 'absolute', top: 20, right: 20, fontSize: 64, fontWeight: 900, color: 'rgba(0,212,255,0.08)', lineHeight: 1, userSelect: 'none' }}>{p.n}</div>
-                <div style={{ width: 48, height: 48, borderRadius: 14, background: p.highlight ? 'rgba(0,212,255,0.15)' : 'rgba(0,212,255,0.1)', border: `1px solid rgba(0,212,255,${p.highlight ? 0.35 : 0.25})`, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 24 }}>
-                  <svg width="24" height="24" fill="none" stroke="#00d4ff" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={p.icon} /></svg>
-                </div>
-                <h3 style={{ color: '#fff', fontWeight: 700, fontSize: 19, marginBottom: 12 }}>{p.title}</h3>
-                <p style={{ color: 'rgba(154,175,199,0.7)', fontSize: 14, lineHeight: 1.7 }}>{p.desc}</p>
-              </div>
-            ))}
-          </div>
-          <div style={{ textAlign: 'center' }}>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, justifyContent: 'center', marginBottom: 16 }}>
-              <a href="#contacto" className="btn-primary" style={{ padding: '16px 40px', borderRadius: 12, fontSize: 15, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 10 }}>
-                {t.proc.cta1}
-                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
-              </a>
-              <a href="https://gia-portafolio.vercel.app/" target="_blank" rel="noopener" className="btn-ghost" style={{ padding: '16px 40px', borderRadius: 12, fontSize: 15, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 10 }}>
-                {t.proc.cta2}
-                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-              </a>
-            </div>
-            <p style={{ color: 'rgba(154,175,199,0.5)', fontSize: 13, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
-              <svg width="14" height="14" fill="none" stroke="#9aafc7" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
-              {t.proc.trust}
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* ── TESTIMONIOS ────────────────────────────────────────────────────── */}
       <section id="testimonios" style={{ padding: '96px 0' }}>
         <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 32px' }}>
@@ -724,19 +662,22 @@ export default function Home() {
             </button>
             <div ref={testimonialsRef} className="testimonials-grid">
               {[
-                { stars: '★★★★★', text: '"G.I.A. Solutions transformó nuestra presencia digital. La página web convierte el doble que la anterior, y el chatbot maneja el 80% de nuestras consultas."', initials: 'GE', color: '0e1f3a/00d4ff', name: 'Dra. Gabriela Escobar', href: 'https://dragabrielaescobar.com/' },
-                { stars: '★★★★★', text: '"Gracias GIA Solutions por ayudarme a crear mi página web y además optimizar mi campaña de marketing; me ha ayudado a llegar a clientes de otros países."', initials: 'DS', color: '0e1f3a/00fff7', name: 'Diego Silva', href: 'https://diegofitcoach.vercel.app/', highlight: true },
-                { stars: '★★★★★', text: '"La página web que GIA Solutions hizo para mi consultorio me permitió agendar más citas de manera online y así pude dejar de hacerlo yo misma, lo cual me ha ahorrado mucho tiempo; además me la entregaron súper rápido."', initials: 'NG', color: '132540/00d4ff', name: 'Abg. Nicole García', href: 'https://webng-eight.vercel.app/' },
-                { stars: '★★★★★', text: '"Gracias por mi tienda virtual, de verdad superaron mis expectativas, me asesoraron durante todo el proceso y me ha ayudado a tener una mejor organización de mis productos."', initials: 'AV', color: '0e1f3a/00d4ff', name: 'Ana Viteri — Inner Path', href: 'https://www.innerpathayurveda.com/' },
+                { text: '"G.I.A. Solutions transformó nuestra presencia digital. La página web convierte el doble que la anterior, y el chatbot maneja el 80% de nuestras consultas."', initials: 'GE', color: '0e1f3a/00d4ff', name: 'Dra. Gabriela Escobar', href: 'https://dragabrielaescobar.com/' },
+                { text: '"¡Excelente trabajo! La personalización y el cuidado en cada detalle de la invitación son excepcionales. (…) ¡Recomiendo esta invitación a cualquiera que se vaya a casar y quiera sorprender a sus invitados con una invitación única!"', initials: 'NL', color: '132540/00d4ff', name: 'Nicolás León', href: SITE.googleMaps, google: true, highlight: true },
+                { text: '"Gracias por mi tienda virtual, de verdad superaron mis expectativas, me asesoraron durante todo el proceso y me ha ayudado a tener una mejor organización de mis productos."', initials: 'AV', color: '0e1f3a/00d4ff', name: 'Ana Viteri — Inner Path', href: 'https://www.innerpathayurveda.com/' },
               ].map((t2, i) => (
-                <div key={i} className="feature-card" style={{ borderRadius: 20, padding: 28, ...(t2.highlight ? { borderColor: 'rgba(0,212,255,0.25)' } : {}) }}>
-                  <div style={{ color: '#00d4ff', fontSize: 13, marginBottom: 16 }}>{t2.stars}</div>
-                  <p style={{ color: 'rgba(154,175,199,0.85)', fontSize: 14, lineHeight: 1.75, marginBottom: 24 }}>{t2.text}</p>
+                <div key={i} className="feature-card testimonial-card" style={{ borderRadius: 20, padding: 28, ...(t2.highlight ? { borderColor: 'rgba(0,212,255,0.25)' } : {}) }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
+                    <span style={{ color: '#00d4ff', fontSize: 13 }} aria-label="5/5">★★★★★</span>
+                    {t2.google && <GoogleIcon size={16} />}
+                  </div>
+                  <p style={{ color: 'rgba(154,175,199,0.85)', fontSize: 14, lineHeight: 1.75, marginBottom: 24, flexGrow: 1 }}>{t2.text}</p>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={`https://placehold.co/40x40/${t2.color}?text=${t2.initials}`} style={{ width: 40, height: 40, borderRadius: '50%', border: '1px solid rgba(0,212,255,0.2)' }} alt={t2.name} />
                     <div>
                       <a href={t2.href} target="_blank" rel="noopener" style={{ color: '#fff', fontWeight: 600, fontSize: 13, textDecoration: 'none', borderBottom: '1px solid rgba(0,212,255,0.4)' }}>{t2.name}</a>
+                      {t2.google && <p style={{ color: 'rgba(154,175,199,0.55)', fontSize: 11, marginTop: 4 }}>{t.test.googleReview}</p>}
                     </div>
                   </div>
                 </div>
@@ -747,8 +688,8 @@ export default function Home() {
             </button>
           </div>
           <div style={{ textAlign: 'center', marginTop: 40 }}>
-            <a href="https://g.page/r/CUHVSGBpoIXpECE/review" target="_blank" rel="noopener" className="btn-ghost" style={{ padding: '14px 32px', borderRadius: 12, fontSize: 14, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 10 }}>
-              <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.52 12.27c0-.85-.08-1.67-.22-2.45H12v4.63h6.47a5.54 5.54 0 01-2.4 3.63v3h3.88c2.27-2.09 3.57-5.17 3.57-8.81z"/><path fill="#34A853" d="M12 24c3.24 0 5.96-1.07 7.95-2.92l-3.88-3a7.15 7.15 0 01-10.65-3.76H1.4v3.1A12 12 0 0012 24z"/><path fill="#FBBC05" d="M5.42 14.32a7.2 7.2 0 010-4.64v-3.1H1.4a12 12 0 000 10.84z"/><path fill="#EA4335" d="M12 4.75c1.76 0 3.34.6 4.59 1.79l3.44-3.44C17.95 1.19 15.24 0 12 0A12 12 0 001.4 6.58l4.02 3.1A7.15 7.15 0 0112 4.75z"/></svg>
+            <a href={SITE.googleReview} target="_blank" rel="noopener" className="btn-ghost" style={{ padding: '14px 32px', borderRadius: 12, fontSize: 14, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 10 }}>
+              <GoogleIcon size={18} />
               {t.test.review}
             </a>
           </div>
@@ -895,7 +836,7 @@ export default function Home() {
                 {[
                   { e: '📍', c: 'Quito, Ecuador' },
                   { e: '📧', c: 'giasolutions.ec@outlook.com', href: 'mailto:giasolutions.ec@outlook.com' },
-                  { e: '📱', c: '+593 995 002 996' },
+                  { e: '📱', c: '+593 983 667 449' },
                 ].map((row, i) => (
                   <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                     <span style={{ fontSize: 14, minWidth: 18 }}>{row.e}</span>
@@ -954,7 +895,7 @@ export default function Home() {
 
       {/* ── WHATSAPP FLOATING BUTTON ────────────────────────────────────────── */}
       <a
-        href="https://wa.me/593995002996"
+        href="https://wa.me/593983667449"
         target="_blank"
         rel="noopener"
         aria-label="WhatsApp"

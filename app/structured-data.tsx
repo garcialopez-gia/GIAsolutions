@@ -41,7 +41,7 @@ export default function StructuredData() {
         { '@type': 'Place', name: 'América Latina' },
       ],
       knowsLanguage: ['es', 'en'],
-      sameAs: [SITE.instagram],
+      sameAs: [SITE.instagram, SITE.googleMaps],
       contactPoint: {
         '@type': 'ContactPoint',
         contactType: 'sales',

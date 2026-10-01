@@ -12,13 +12,15 @@ export const SITE = {
   url: SITE_URL,
   locale: 'es_EC',
   email: 'giasolutions.ec@outlook.com',
-  phone: '+593995002996',
-  phoneDisplay: '+593 995 002 996',
+  phone: '+593983667449',
+  phoneDisplay: '+593 983 667 449',
   city: 'Quito',
   region: 'Pichincha',
   country: 'EC',
   instagram: 'https://www.instagram.com/giasolutions.ec/',
-  whatsapp: 'https://wa.me/593995002996',
+  whatsapp: 'https://wa.me/593983667449',
+  googleMaps: 'https://www.google.com/maps?cid=16827031957187122497',
+  googleReview: 'https://g.page/r/CUHVSGBpoIXpECE/review',
   foundingDate: '2024',
 } as const
 

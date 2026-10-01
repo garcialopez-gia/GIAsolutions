@@ -56,7 +56,7 @@ Our services:
 Portfolio: https://gia-portafolio.vercel.app/
 
 Contact:
-- WhatsApp: +593 995 002 996
+- WhatsApp: +593 983 667 449
 - Email: giasolutions.ec@outlook.com
 - Instagram: @giasolutions.ec
 - Location: Quito, Ecuador (remote service available worldwide)
@@ -106,7 +106,7 @@ const MESSAGES = {
     streamError: '\n\n_(Lo siento, ocurrió un error al generar la respuesta. Por favor, intenta de nuevo.)_',
     rateLimit: 'El servicio de IA está muy ocupado en este momento. Por favor, espera unos segundos e intenta de nuevo.',
     timeout: 'La solicitud tardó demasiado. Por favor, intenta de nuevo.',
-    generalError: 'El asistente de IA no está disponible en este momento. Por favor, contáctanos directamente por WhatsApp: +593 995 002 996',
+    generalError: 'El asistente de IA no está disponible en este momento. Por favor, contáctanos directamente por WhatsApp: +593 983 667 449',
   },
   en: {
     invalidJson: 'The request body is not valid JSON.',
@@ -117,7 +117,7 @@ const MESSAGES = {
     streamError: "\n\n_(Sorry, something went wrong while generating the response. Please try again.)_",
     rateLimit: 'The AI service is very busy right now. Please wait a few seconds and try again.',
     timeout: 'The request took too long. Please try again.',
-    generalError: 'The AI assistant is unavailable right now. Please contact us directly on WhatsApp: +593 995 002 996',
+    generalError: 'The AI assistant is unavailable right now. Please contact us directly on WhatsApp: +593 983 667 449',
   },
 } as const
 

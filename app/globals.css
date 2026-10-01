@@ -450,7 +450,7 @@ section[id], div[id] {
   .nav-inner { padding: 0 32px !important; }
 }
 @media (max-width: 900px) {
-  .hero-grid, .process-grid, .footer-grid {
+  .hero-grid, .footer-grid {
     grid-template-columns: 1fr !important;
   }
   .service-grid {
@@ -500,13 +500,8 @@ section[id], div[id] {
   flex: 0 0 auto;
   width: min(85vw, 360px);
 }
-@media (min-width: 900px) {
-  .testimonials-grid > div { width: calc((100% - 60px) / 3.3); }
-}
+.testimonial-card { display: flex; flex-direction: column; }
 .testimonials-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -516,18 +511,30 @@ section[id], div[id] {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 2;
   transition: background 0.2s, border-color 0.2s;
 }
 .testimonials-arrow:hover { background: rgba(0,212,255,0.15); border-color: rgba(0,212,255,0.5); }
-.testimonials-arrow.prev { left: -8px; }
-.testimonials-arrow.next { right: -8px; }
+/* Móvil y tablet: carrusel deslizable con las flechas centradas debajo */
+@media (max-width: 899px) {
+  .testimonials-wrap {
+    display: grid;
+    grid-template-columns: 1fr auto auto 1fr;
+    grid-template-areas: "list list list list" ". prev next .";
+    column-gap: 12px;
+    row-gap: 24px;
+  }
+  .testimonials-grid { grid-area: list; min-width: 0; }
+  .testimonials-arrow.prev { grid-area: prev; }
+  .testimonials-arrow.next { grid-area: next; }
+}
 @media (max-width: 640px) {
-  .testimonials-wrap { padding: 0 38px; }
-  .testimonials-arrow { width: 32px; height: 32px; }
-  .testimonials-arrow.prev { left: 0; }
-  .testimonials-arrow.next { right: 0; }
-  .testimonials-grid > div { width: 90%; }
+  .testimonials-grid > div { width: 86%; }
+}
+/* Escritorio: las 3 reseñas fijas en columnas, sin flechas */
+@media (min-width: 900px) {
+  .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); overflow: visible; }
+  .testimonials-grid > div { width: auto; }
+  .testimonials-arrow { display: none; }
 }
 
 /* ── Flip cards (móvil) ── */
