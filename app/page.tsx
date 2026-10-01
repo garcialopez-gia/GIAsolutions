@@ -54,7 +54,7 @@ const T = {
     footer: {
       services: 'Servicios', company: 'Empresa', legal: 'Legal',
       copyright: '©2026 G.I.A. Solutions. Todos los derechos reservados.',
-      svcLinks: ['Creación de páginas web', 'Menús digitales inteligentes', 'Auditoría digital de tu negocio', 'Asistentes de auditoría bajo normas ISO'],
+      svcLinks: ['Creación de páginas web', 'Menús digitales inteligentes', 'Tarjetas digitales G.I.A. Cards', 'Asistentes de auditoría bajo normas ISO'],
       compLinks: [{ l: 'Nosotros', h: '#' }, { l: 'Casos de éxito', h: '#testimonios' }, { l: 'FAQ', h: '#faq' }, { l: 'Contacto', h: '#contacto' }],
     },
   },
@@ -102,7 +102,7 @@ const T = {
     footer: {
       services: 'Services', company: 'Company', legal: 'Legal',
       copyright: '©2026 G.I.A. Solutions. All rights reserved.',
-      svcLinks: ['Website development', 'Smart digital menus', 'Digital business audit', 'ISO-compliant audit assistants'],
+      svcLinks: ['Website development', 'Smart digital menus', 'G.I.A. Cards digital business cards', 'ISO-compliant audit assistants'],
       compLinks: [{ l: 'About', h: '#' }, { l: 'Case studies', h: '#testimonios' }, { l: 'FAQ', h: '#faq' }, { l: 'Contact', h: '#contacto' }],
     },
   },
@@ -111,7 +111,7 @@ const T = {
 // ─── SERVICE DATA ─────────────────────────────────────────────────────────────
 type ServiceItem = {
   label: string; title: string; titleGrad: string; desc: string; desc2: string; back: string;
-  reverse?: boolean; demoHref?: string;
+  reverse?: boolean; demoHref?: string; demoLabel?: string;
   features: { icon: string; title: string; desc: string }[]
 }
 
@@ -140,14 +140,15 @@ const SERVICES_DATA: Record<Lang, ServiceItem[]> = {
       ],
     },
     {
-      label: 'Auditoría digital de tu negocio', title: 'Haz que cada dólar', titleGrad: 'trabaje más duro',
-      desc: 'Analizamos tu presencia digital completa, identificamos qué está frenando tu crecimiento y te damos el plan exacto para escalar tu negocio.',
-      desc2: 'Revisamos tu sitio web, redes sociales, campañas de pauta y posicionamiento en buscadores.',
-      back: '03 — Auditoría digital',
+      label: 'G.I.A. Cards · Tarjetas digitales', title: 'Tu tarjeta digital,', titleGrad: 'en un solo toque',
+      desc: 'Tarjetas de presentación digitales con QR y NFC: tus clientes guardan tu contacto, redes y reseñas de Google con un toque, sin apps ni tarjetas de papel.',
+      desc2: 'Diseñadas a tu medida y listas en pocos días, desde $15 al año con sticker NFC incluido.',
+      back: '03 — G.I.A. Cards',
+      demoHref: 'https://gia-cards.vercel.app/ejemplos', demoLabel: 'Mira tarjetas reales',
       features: [
-        { icon: 'M15 12a3 3 0 11-6 0 3 3 0 016 0zM2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z', title: 'Análisis profundo de campañas', desc: 'Detectamos qué está desperdiciando tu presupuesto.' },
-        { icon: 'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z', title: 'Reducción de costo por resultado', desc: 'Clientes reducen su CPR hasta un 42% en 30 días.' },
-        { icon: 'M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z', title: 'Informe detallado + hoja de ruta', desc: 'Reporte accionable con pasos para escalar tu inversión.' },
+        { icon: 'M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3', title: 'QR y NFC listos para usar', desc: 'Tu cliente acerca el celular o escanea el código, sin descargar nada.' },
+        { icon: 'M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM3 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 019.374 21c-2.331 0-4.512-.645-6.374-1.766z', title: 'Guardado de contacto en 1 toque', desc: 'Contacto, redes, WhatsApp y sitio web en un solo enlace siempre actualizado.' },
+        { icon: 'M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.499z', title: 'Reseñas de Google a un toque', desc: 'Un botón directo a tu ficha para que tus clientes te califiquen sin buscarte.' },
       ],
     },
   ],
@@ -175,14 +176,15 @@ const SERVICES_DATA: Record<Lang, ServiceItem[]> = {
       ],
     },
     {
-      label: 'Digital Business Audit', title: 'Stop guessing.', titleGrad: 'Start scaling.',
-      desc: 'We audit your entire digital footprint — website, social, paid ads, and organic search — then hand you a clear roadmap to cut waste and double down on what actually works.',
-      desc2: 'We dig into your campaigns, content, positioning, and tech stack to give you the full picture.',
-      back: '03 — Digital Audit',
+      label: 'G.I.A. Cards · Digital Business Cards', title: 'Your business card,', titleGrad: 'one tap away',
+      desc: 'Digital business cards with QR and NFC: customers save your contact, socials, and Google reviews with one tap — no apps, no paper cards.',
+      desc2: 'Custom-designed and ready in a few days, from $15 a year with an NFC sticker included.',
+      back: '03 — G.I.A. Cards',
+      demoHref: 'https://gia-cards.vercel.app/ejemplos', demoLabel: 'See real cards',
       features: [
-        { icon: 'M15 12a3 3 0 11-6 0 3 3 0 016 0zM2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z', title: 'In-depth campaign analysis', desc: 'We pinpoint exactly where your budget is leaking — and why.' },
-        { icon: 'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z', title: 'Lower cost per result', desc: 'Our clients cut their CPR by up to 42% within the first 30 days.' },
-        { icon: 'M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z', title: 'Actionable report + growth roadmap', desc: 'No fluff — just a concrete, step-by-step plan to scale your ROI.' },
+        { icon: 'M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3', title: 'QR and NFC, ready to use', desc: 'Customers tap their phone or scan the code — nothing to download.' },
+        { icon: 'M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM3 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 019.374 21c-2.331 0-4.512-.645-6.374-1.766z', title: 'Save your contact in one tap', desc: 'Contact info, socials, WhatsApp, and website in one always-current link.' },
+        { icon: 'M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.499z', title: 'Google reviews in one tap', desc: 'A direct button to your listing so customers can rate you without searching.' },
       ],
     },
   ],
@@ -589,7 +591,7 @@ export default function Home() {
                       <p style={{ color: 'rgba(154,175,199,0.6)', fontSize: 13, lineHeight: 1.65 }}>
                         {svc.desc2}
                         {svc.demoHref && (
-                          <> {' '}<a href={svc.demoHref} target="_blank" rel="noopener" onClick={(e) => e.stopPropagation()} style={{ color: '#00d4ff', fontWeight: 600, textDecoration: 'underline' }}>{t.svc.demo}</a></>
+                          <> {' '}<a href={svc.demoHref} target="_blank" rel="noopener" onClick={(e) => e.stopPropagation()} style={{ color: '#00d4ff', fontWeight: 600, textDecoration: 'underline' }}>{svc.demoLabel ?? t.svc.demo}</a></>
                         )}
                       </p>
                     </div>
@@ -657,7 +659,7 @@ export default function Home() {
                   <p style={{ color: 'rgba(154,175,199,0.6)', fontSize: 14, lineHeight: 1.75 }}>{svc.desc2}</p>
                   {svc.demoHref && (
                     <a href={svc.demoHref} target="_blank" rel="noopener" style={{ display: 'inline-block', marginTop: 16, color: '#00d4ff', fontSize: 14, fontWeight: 600, textDecoration: 'underline' }}>
-                      {t.svc.demo}
+                      {svc.demoLabel ?? t.svc.demo}
                     </a>
                   )}
                 </div>

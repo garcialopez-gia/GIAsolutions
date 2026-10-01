@@ -40,7 +40,9 @@ export const SEO = {
     'GIA Foods',
     'giafoods',
     'carta digital QR Quito',
-    'auditoría digital',
+    'tarjetas de presentación digitales',
+    'tarjeta digital NFC Quito',
+    'G.I.A. Cards',
     'agencia de automatizaciones Quito',
     'agencia marketing digital Ecuador',
     'automatización con inteligencia artificial',
@@ -62,9 +64,10 @@ export const SERVICES_SEO = [
     url: 'https://giafoods.vercel.app',
   },
   {
-    name: 'Auditoría digital de negocios',
+    name: 'Tarjetas de presentación digitales (G.I.A. Cards)',
     description:
-      'Análisis completo de tu presencia digital: sitio web, redes sociales, campañas de pauta y posicionamiento en buscadores, con informe accionable y hoja de ruta.',
+      'Tarjetas de presentación digitales con QR y NFC: tus clientes guardan tu contacto, redes sociales y reseñas de Google con un toque, sin apps ni tarjetas de papel. Diseño a medida desde $15 al año.',
+    url: 'https://gia-cards.vercel.app',
   },
   {
     name: 'Asistentes de auditoría bajo normas ISO',

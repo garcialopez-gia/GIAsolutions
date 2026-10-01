@@ -47,10 +47,11 @@ Our services:
    - Native and cross-platform mobile applications (iOS & Android)
    - Custom development for any industry
 
-7. Digital Audit
-   - Deep analysis of your digital presence: website, social media, paid campaigns
-   - Identifies what's holding back your growth
-   - Actionable roadmap — clients reduce cost-per-result by up to 42% in 30 days
+7. G.I.A. Cards (Digital Business Cards)
+   - Digital business cards with QR and NFC, custom-designed for each client
+   - Customers save your contact, socials, WhatsApp, website and Google reviews with one tap — no app needed
+   - Plans from $15 per year, NFC sticker included
+   - Examples: https://gia-cards.vercel.app/ejemplos
 
 Portfolio: https://gia-portafolio.vercel.app/
 
