@@ -32,11 +32,11 @@ Our services:
    - Complete online stores to sell products or services
    - Payment gateway integration, inventory management, optimized UX
 
-4. AI Chatbots
-   - 24/7 automated customer service
-   - Multi-channel: WhatsApp, Web, Instagram
-   - Automatic lead qualification and CRM integration
-   - Custom brand personality — your bot speaks like you
+4. AI Agents for Business (our lead service)
+   - An AI agent is an artificial intelligence program that takes a goal, decides which steps to follow, and carries them out on its own in the business's tools (WhatsApp, email, calendar, CRM, invoicing)
+   - We are AI agent providers: we design, build, and integrate custom agents for each company, based in Quito and working remotely across Ecuador and Latin America
+   - Multi-channel: WhatsApp, Web, Instagram, plus CRM and other business systems
+   - A standard implementation takes 7–15 business days
 
 5. Clinical Software & Patient Apps
    - Digital transformation for healthcare: clinics, medical offices, wellness businesses

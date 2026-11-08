@@ -19,7 +19,7 @@ const config: Config = {
         silver: '#9aafc7',
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-geist)', 'system-ui', 'sans-serif'],
       },
     },
   },

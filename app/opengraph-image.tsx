@@ -5,7 +5,7 @@ import { SITE } from './lib/site'
 
 // Tarjeta 1200×630 que se muestra al compartir el link en WhatsApp,
 // LinkedIn, Facebook, X o Slack.
-export const alt = 'G.I.A. Solutions — Creación de páginas web y e-commerce en Quito, Ecuador'
+export const alt = 'G.I.A. Solutions — Agentes IA, páginas web y e-commerce en Quito, Ecuador'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
@@ -67,13 +67,13 @@ export default async function OpengraphImage() {
             color: '#ffffff',
           }}
         >
-          <div style={{ display: 'flex' }}>Creación de páginas web,</div>
-          <div style={{ display: 'flex', color: '#4dd4f5' }}>e-commerce y menús digitales</div>
+          <div style={{ display: 'flex' }}>Agentes IA para empresas,</div>
+          <div style={{ display: 'flex', color: '#4dd4f5' }}>páginas web y e-commerce</div>
         </div>
 
         {/* Subtítulo */}
         <div style={{ display: 'flex', marginTop: 32, fontSize: 30, color: '#9aafc7' }}>
-          Agencia de automatizaciones · {SITE.city}, Ecuador
+          Proveedores de agentes IA · {SITE.city}, Ecuador
         </div>
 
         {/* Línea inferior */}

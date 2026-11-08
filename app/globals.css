@@ -3,8 +3,9 @@
 @tailwind utilities;
 
 html { scroll-behavior: smooth; }
-body { background-color: #0a1628; color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+body { background-color: #0a1628; color: #fff; font-family: var(--font-geist), system-ui, sans-serif; overflow-x: hidden; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 *, *::before, *::after { box-sizing: border-box; }
+h1, h2, h3 { letter-spacing: -0.03em; }
 
 .text-glow {
   text-shadow: 0 0 20px rgba(77,212,245,0.5), 0 0 40px rgba(0,170,212,0.25);
@@ -453,12 +454,6 @@ section[id], div[id] {
   .hero-grid, .footer-grid {
     grid-template-columns: 1fr !important;
   }
-  .service-grid {
-    grid-template-columns: 1fr !important;
-  }
-  .service-grid > div {
-    order: unset !important;
-  }
   .metrics-grid {
     grid-template-columns: repeat(2, 1fr) !important;
   }
@@ -538,14 +533,15 @@ section[id], div[id] {
 }
 
 /* ── Flip cards (móvil) ── */
-@media (max-width: 767px) {
-  .service-grid, .service-sep { display: none !important; }
+@media (max-width: 767.98px) {
+  .svc-pin { display: none; }
   .service-flip-container { display: flex !important; flex-direction: column; gap: 16px; margin-bottom: 40px; }
-  .flip-card { perspective: 1200px; height: 390px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
-  .flip-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s cubic-bezier(0.4,0,0.2,1); transform-style: preserve-3d; }
+  .flip-card { perspective: 1200px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+  .flip-card-inner { display: grid; transition: transform 0.6s cubic-bezier(0.4,0,0.2,1); transform-style: preserve-3d; }
   .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
+  /* Ambas caras en la misma celda: la tarjeta crece con la cara más larga. */
   .flip-card-front, .flip-card-back {
-    position: absolute; inset: 0; border-radius: 20px;
+    grid-area: 1 / 1; min-width: 0; min-height: 390px; border-radius: 20px;
     backface-visibility: hidden; -webkit-backface-visibility: hidden;
     overflow: hidden;
   }
@@ -553,4 +549,133 @@ section[id], div[id] {
 }
 @media (min-width: 768px) {
   .service-flip-container { display: none !important; }
+}
+
+/* ── Servicios ──
+   Una sola estructura para todos los tamaños: paneles apilados por defecto y,
+   en escritorio, una pista horizontal dentro de un contenedor fijado. */
+.svc-section { position: relative; padding: 96px 0; }
+.svc-intro { position: relative; max-width: 1280px; margin: 0 auto 64px; padding: 0 32px; text-align: center; }
+.svc-flip-wrap { position: relative; max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+.svc-pin { position: relative; }
+.svc-rail { display: none; }
+
+.svc-beat { padding-bottom: 40px; }
+.svc-beat-inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 40px;
+  align-items: center;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+.svc-label { color: #00d4ff; font-size: 14px; font-weight: 500; margin-bottom: 16px; }
+.svc-title { font-size: clamp(30px, 4.6vw, 44px); font-weight: 600; line-height: 1.08; margin-bottom: 24px; }
+.svc-whatis { color: #fff; font-size: 18px; font-weight: 600; letter-spacing: -0.015em; margin-bottom: 8px; }
+.svc-lead { color: #b4c5d8; font-size: 16px; line-height: 1.65; max-width: 36em; margin-bottom: 14px; }
+.svc-note { color: rgba(154,175,199,0.75); font-size: 14px; line-height: 1.65; max-width: 38em; }
+.svc-cta { display: inline-flex; align-items: center; margin-top: 24px; padding: 14px 24px; border-radius: 12px; font-size: 15px; text-decoration: none; }
+.svc-demo { display: inline-block; margin-top: 16px; color: #00d4ff; font-size: 14px; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+
+.svc-trace, .svc-features { border-radius: 20px; padding: 32px; }
+.svc-trace-title { color: rgba(154,175,199,0.8); font-size: 13px; font-weight: 500; margin-bottom: 24px; }
+.svc-steps { list-style: none; margin: 0; padding: 0; }
+.svc-step { position: relative; padding: 0 0 24px 28px; transition: opacity 0.35s ease; }
+.svc-step:last-child { padding-bottom: 0; }
+.svc-step::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 7px;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: #00d4ff;
+  box-shadow: 0 0 10px rgba(0,212,255,0.7);
+  transition: background 0.35s ease, box-shadow 0.35s ease;
+}
+.svc-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 4px; top: 22px; bottom: -3px;
+  width: 1px;
+  background: rgba(0,212,255,0.35);
+}
+.svc-step-title { color: #fff; font-size: 16px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 4px; }
+.svc-step-desc { color: rgba(154,175,199,0.85); font-size: 14px; line-height: 1.55; }
+
+.svc-feature-list { display: flex; flex-direction: column; gap: 24px; }
+.svc-feature { display: flex; align-items: flex-start; gap: 14px; }
+.svc-feature-icon {
+  display: flex; align-items: center; justify-content: center;
+  flex: 0 0 34px; height: 34px;
+  border-radius: 10px;
+  background: rgba(0,212,255,0.1);
+  border: 1px solid rgba(0,212,255,0.2);
+}
+.svc-feature-title { color: #fff; font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+.svc-feature-desc { color: rgba(154,175,199,0.8); font-size: 14px; line-height: 1.55; }
+
+/* Tablet y equivalentes: paneles apilados con separador */
+@media (min-width: 768px) {
+  .svc-beat { padding-bottom: 72px; }
+  .svc-beat + .svc-beat {
+    padding-top: 72px;
+    background: linear-gradient(90deg, transparent, rgba(0,212,255,0.4), transparent) top / 100% 1px no-repeat;
+  }
+  .svc-beat:last-child { padding-bottom: 0; }
+}
+@media (min-width: 900px) {
+  .svc-beat-inner { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 64px; }
+  .svc-beat.is-reverse .svc-copy { order: 2; }
+}
+
+/* Escritorio: debe coincidir con PIN_QUERY de ServicesShowcase.tsx */
+@media (min-width: 1024px) and (min-height: 620px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .svc-section { padding-bottom: 0; }
+  .svc-intro { margin-bottom: 24px; }
+  .svc-pin { height: calc((var(--svc-run) + 100) * 1vh); }
+  .svc-stage { position: sticky; top: 0; height: 100vh; overflow: hidden; overflow: clip; }
+  .svc-track { display: flex; width: calc(var(--svc-beats) * 100%); height: 100%; will-change: transform; }
+  .svc-beat, .svc-beat + .svc-beat, .svc-beat:last-child {
+    display: flex;
+    align-items: center;
+    flex: 0 0 calc(100% / var(--svc-beats));
+    height: 100%;
+    padding: 124px 0 28px;
+    background: none;
+  }
+  .svc-beat-inner { grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr); gap: 56px; }
+  .svc-beat.is-reverse .svc-beat-inner { grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr); }
+  .svc-title { font-size: clamp(36px, min(4.3vw, 7.4vh), 58px); margin-bottom: clamp(14px, 2.6vh, 28px); }
+  .svc-whatis { font-size: clamp(16px, 2.2vh, 20px); }
+  .svc-lead { font-size: clamp(15px, 2.1vh, 18px); }
+  .svc-note { font-size: clamp(14px, 1.8vh, 16px); }
+  .svc-cta { margin-top: clamp(16px, 3vh, 32px); }
+  .svc-trace, .svc-features { padding: clamp(22px, 3.6vh, 40px); }
+  .svc-trace-title { margin-bottom: clamp(14px, 2.6vh, 28px); }
+  .svc-step { padding-bottom: clamp(14px, 2.8vh, 30px); }
+  .svc-step[data-dim] { opacity: 0.4; }
+  .svc-step[data-dim]::before { background: rgba(154,175,199,0.5); box-shadow: none; }
+  .svc-feature-list { gap: clamp(16px, 3vh, 32px); }
+
+  .svc-rail { display: block; position: absolute; top: 72px; left: 0; right: 0; z-index: 2; }
+  .svc-rail-inner { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+  .svc-rail-tabs { display: grid; grid-template-columns: repeat(var(--svc-beats), minmax(0, 1fr)); }
+  .svc-rail-tabs button {
+    padding: 8px 0 12px;
+    text-align: left;
+    background: none;
+    border: 0;
+    color: rgba(154,175,199,0.6);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.25s ease;
+  }
+  .svc-rail-tabs button:hover, .svc-rail-tabs button[aria-current] { color: #fff; }
+  .svc-rail-tabs button:focus-visible { outline: 2px solid #00d4ff; outline-offset: 2px; border-radius: 4px; }
+  .svc-rail-line { height: 1px; background: rgba(154,175,199,0.18); }
+  .svc-rail-bar { height: 100%; background: #00d4ff; transform: scaleX(calc(1 / var(--svc-beats))); transform-origin: left; }
 }

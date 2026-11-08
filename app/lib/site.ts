@@ -1,10 +1,7 @@
 // ─── SITE CONSTANTS ───────────────────────────────────────────────────────────
 // Fuente única de verdad para SEO, sitemap, robots y datos estructurados.
-// Cuando compres un dominio propio, define NEXT_PUBLIC_SITE_URL en Vercel
-// (Settings → Environment Variables) y todo lo demás se actualiza solo.
 
-export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '') ?? 'https://gi-asolutions.vercel.app'
+export const SITE_URL = 'https://www.giasolutionsec.com'
 
 export const SITE = {
   name: 'G.I.A. Solutions',
@@ -25,11 +22,22 @@ export const SITE = {
 } as const
 
 export const SEO = {
-  title: 'Creación de Páginas Web y E-commerce en Quito | G.I.A. Solutions',
+  title: 'Agentes IA y Páginas Web en Quito, Ecuador | G.I.A. Solutions',
   titleTemplate: '%s | G.I.A. Solutions',
   description:
-    'Creación de páginas web, tiendas e-commerce y menús digitales QR para restaurantes en Quito, Ecuador. Sitio listo en 7 días hábiles. Diagnóstico gratuito.',
+    'Proveedores de agentes IA en Ecuador: los creamos e integramos en WhatsApp, CRM y tus sistemas. También páginas web y e-commerce. Diagnóstico gratuito.',
   keywords: [
+    'agentes IA',
+    'agentes de inteligencia artificial',
+    'qué es un agente IA',
+    'cómo crear un agente IA',
+    'dónde contratar agentes IA',
+    'proveedor de agentes IA',
+    'empresa de agentes IA Ecuador',
+    'agentes IA para empresas',
+    'agentes IA Quito',
+    'agentes IA WhatsApp',
+    'implementación de agentes IA',
     'creación de páginas web',
     'diseño web Quito',
     'páginas web Ecuador',
@@ -54,6 +62,17 @@ export const SEO = {
 
 // Servicios ofertados — usados en el catálogo de datos estructurados (schema.org)
 export const SERVICES_SEO = [
+  {
+    name: 'Agentes IA para empresas',
+    alternateName: [
+      'Agentes de inteligencia artificial',
+      'Creación de agentes IA',
+      'Implementación de agentes IA',
+    ],
+    serviceType: 'Desarrollo e implementación de agentes de inteligencia artificial',
+    description:
+      'Proveedores de agentes IA en Ecuador. Un agente IA es un programa de inteligencia artificial que recibe un objetivo, decide qué pasos seguir y los ejecuta por sí solo. Los creamos a la medida de cada empresa y los integramos con WhatsApp, sitio web, CRM y otros sistemas.',
+  },
   {
     name: 'Creación de páginas web y e-commerce',
     description:

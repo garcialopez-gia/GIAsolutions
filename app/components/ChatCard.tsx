@@ -140,7 +140,7 @@ export default function ChatCard({ lang = 'es' }: ChatCardProps) {
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
         <p style={{ fontSize: 11, color: 'rgba(154,175,199,0.5)', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 500 }}>
-          {lang === 'en' ? 'Active chatbot' : 'Chatbot activo'}
+          {lang === 'en' ? 'G.I.A. assistant' : 'Asistente G.I.A.'}
         </p>
         <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
           <span className="pulse-dot" style={{ width: 6, height: 6, borderRadius: '50%', background: '#4ade80', display: 'inline-block' }} />

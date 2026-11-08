@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import ChatCard from './components/ChatCard'
+import ServicesShowcase, { type AgentContent, type ServiceItem } from './components/ServicesShowcase'
 import { FAQ_DATA } from './data/faq'
 import { SITE } from './lib/site'
 
@@ -23,13 +24,13 @@ const T = {
       badge: 'ECOSISTEMAS DIGITALES',
       h1a: 'Tu negocio', h1b: 'Trabajando sin ti',
       p1: 'Analizamos tu audiencia y los cuellos de botella en tu negocio, optimizamos tu presencia digital e incrementamos tu exposición en el mercado ecuatoriano y latinoamericano.',
-      p2: 'Agencia de Automatizaciones, con sede en Quito, Ecuador, especializada en hacer crecer tu negocio con tecnología de vanguardia.',
+      p2: 'Proveedores de agentes IA y automatizaciones, con sede en Quito, Ecuador, especializados en hacer crecer tu negocio con tecnología de vanguardia.',
       cta1: 'Agenda tu diagnóstico gratuito con nosotros', cta2: 'Ver servicios',
     },
     svc: {
       badge: 'Nuestros Servicios',
       h2a: 'Conoce la Nueva Experiencia', h2b: 'de Crecimiento Digital',
-      desc: 'Combinamos automatizaciones con estrategia digital para llevar tu negocio al siguiente nivel.',
+      desc: 'Combinamos agentes IA, automatizaciones y estrategia digital para llevar tu negocio al siguiente nivel.',
       tapFwd: 'Toca para ver detalles', tapBack: 'Toca para volver',
       demo: 'Solicita tu demo gratis',
     },
@@ -55,7 +56,7 @@ const T = {
     footer: {
       services: 'Servicios', company: 'Empresa', legal: 'Legal',
       copyright: '©2026 G.I.A. Solutions. Todos los derechos reservados.',
-      svcLinks: ['Creación de páginas web', 'Menús digitales inteligentes', 'Tarjetas digitales G.I.A. Cards', 'Asistentes de auditoría bajo normas ISO'],
+      svcLinks: ['Agentes IA para empresas', 'Creación de páginas web', 'Menús digitales inteligentes', 'Tarjetas digitales G.I.A. Cards', 'Asistentes de auditoría bajo normas ISO'],
       compLinks: [{ l: 'Nosotros', h: '#' }, { l: 'Casos de éxito', h: '#testimonios' }, { l: 'FAQ', h: '#faq' }, { l: 'Contacto', h: '#contacto' }],
     },
   },
@@ -65,13 +66,13 @@ const T = {
       badge: 'AI-POWERED AUTOMATION',
       h1a: 'Your business,', h1b: 'running on autopilot',
       p1: 'We identify what\'s holding your growth back, build automated systems that attract and convert customers, and give your digital presence the edge it needs — so you can focus on running your business.',
-      p2: 'Automation agency based in Quito, Ecuador, helping businesses across Latin America scale smarter with AI-driven strategy and cutting-edge digital tools.',
+      p2: 'AI agent and automation provider based in Quito, Ecuador, helping businesses across Latin America scale smarter with AI-driven strategy and cutting-edge digital tools.',
       cta1: 'Book your free strategy session', cta2: 'Explore our services',
     },
     svc: {
       badge: 'What We Do',
       h2a: 'The smarter path', h2b: 'to sustainable growth',
-      desc: 'We pair intelligent automation with proven digital strategy — so your business scales without the overhead.',
+      desc: 'We pair AI agents and intelligent automation with proven digital strategy — so your business scales without the overhead.',
       tapFwd: 'Tap to see details', tapBack: 'Tap to go back',
       demo: 'Request your free demo',
     },
@@ -97,26 +98,64 @@ const T = {
     footer: {
       services: 'Services', company: 'Company', legal: 'Legal',
       copyright: '©2026 G.I.A. Solutions. All rights reserved.',
-      svcLinks: ['Website development', 'Smart digital menus', 'G.I.A. Cards digital business cards', 'ISO-compliant audit assistants'],
+      svcLinks: ['AI agents for business', 'Website development', 'Smart digital menus', 'G.I.A. Cards digital business cards', 'ISO-compliant audit assistants'],
       compLinks: [{ l: 'About', h: '#' }, { l: 'Case studies', h: '#testimonios' }, { l: 'FAQ', h: '#faq' }, { l: 'Contact', h: '#contacto' }],
     },
   },
 }
 
 // ─── SERVICE DATA ─────────────────────────────────────────────────────────────
-type ServiceItem = {
-  label: string; title: string; titleGrad: string; desc: string; desc2: string; back: string;
-  reverse?: boolean; demoHref?: string; demoLabel?: string;
-  features: { icon: string; title: string; desc: string }[]
+const AGENT_DATA: Record<Lang, AgentContent> = {
+  es: {
+    short: 'Agentes IA',
+    label: 'Agentes IA para empresas',
+    title: 'Agentes IA que', titleGrad: 'trabajan por ti',
+    whatIs: '¿Qué es un agente IA?',
+    definition: 'Un agente IA es un programa de inteligencia artificial que recibe un objetivo, decide qué pasos seguir y los ejecuta por sí solo en las herramientas de tu negocio: WhatsApp, correo, calendario, CRM o facturación.',
+    provider: 'En G.I.A. Solutions creamos e integramos agentes IA a la medida de tu empresa, desde Quito para todo Ecuador y Latinoamérica.',
+    cta: 'Quiero un agente IA para mi negocio',
+    exampleTitle: 'Ejemplo: una cotización por WhatsApp',
+    steps: [
+      { title: 'Entiende', desc: 'Un cliente escribe «¿Me cotizas 20 cajas para el viernes?» y el agente identifica qué necesita.' },
+      { title: 'Decide', desc: 'Consulta tu inventario y tus precios, y elige cómo responder.' },
+      { title: 'Actúa', desc: 'Envía la cotización, agenda la entrega y registra el pedido en tu CRM.' },
+      { title: 'Te avisa', desc: 'Solo te pasa lo que necesita a una persona.' },
+    ],
+  },
+  en: {
+    short: 'AI agents',
+    label: 'AI agents for business',
+    title: 'AI agents that', titleGrad: 'do the work for you',
+    whatIs: 'What is an AI agent?',
+    definition: 'An AI agent is an artificial intelligence program that takes a goal, decides which steps to follow, and carries them out on its own in your business tools: WhatsApp, email, calendar, CRM, or invoicing.',
+    provider: 'G.I.A. Solutions builds and integrates AI agents around your company, from Quito to all of Ecuador and Latin America.',
+    cta: 'I want an AI agent for my business',
+    exampleTitle: 'Example: a quote over WhatsApp',
+    steps: [
+      { title: 'Understands', desc: 'A customer writes “Can you quote 20 boxes for Friday?” and the agent works out what they need.' },
+      { title: 'Decides', desc: 'It checks your inventory and pricing, and chooses how to respond.' },
+      { title: 'Acts', desc: 'It sends the quote, schedules delivery, and logs the order in your CRM.' },
+      { title: 'Keeps you posted', desc: 'It only hands you what needs a person.' },
+    ],
+  },
 }
+
+const AGENT_STEP_ICONS = [
+  'M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z',
+  'M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z',
+  'M13 10V3L4 14h7v7l9-11h-7z',
+  'M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9',
+]
+
+type FlipCard = Pick<ServiceItem, 'label' | 'title' | 'titleGrad' | 'desc' | 'desc2' | 'back' | 'demoHref' | 'demoLabel' | 'features'> & { heading?: string }
 
 const SERVICES_DATA: Record<Lang, ServiceItem[]> = {
   es: [
     {
-      label: 'Creación de Páginas Web', title: 'Tu presencia digital,', titleGrad: 'rediseñada',
+      label: 'Páginas web y e-commerce', short: 'Páginas web y e-commerce', title: 'Tu presencia digital,', titleGrad: 'rediseñada',
       desc: 'Creamos páginas web de alto impacto que convierten visitantes en clientes. Cada sitio está diseñado estratégicamente para maximizar tu ROI.',
       desc2: 'Desde landing pages hasta e-commerce completos, analizamos qué funciona mejor en tu industria y lo aplicamos en tu sitio.',
-      back: '01 — Páginas Web',
+      back: 'Páginas web y e-commerce',
       features: [
         { icon: 'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z', title: 'Diseño personalizado', desc: 'Páginas únicas optimizadas para conversión, adaptadas a tu marca.' },
         { icon: 'M13 10V3L4 14h7v7l9-11h-7z', title: 'Velocidad y SEO optimizados', desc: 'Carga en menos de 2 segundos y posicionamiento en Google.' },
@@ -124,10 +163,10 @@ const SERVICES_DATA: Record<Lang, ServiceItem[]> = {
       ],
     },
     {
-      label: 'Menús Digitales Inteligentes', title: 'Tu menú, tu marca,', titleGrad: 'pedidos sin fricción',
+      label: 'Menús Digitales Inteligentes', short: 'Menús digitales', title: 'Tu menú, tu marca,', titleGrad: 'pedidos sin fricción',
       desc: 'Pedido por QR en la mesa: tus clientes arman su pedido y lo envían directo a cocina, sin descargar ninguna app.',
       desc2: 'Categorías, fotos y disponibilidad al instante, con facturación electrónica SRI.',
-      back: '02 — Menús Digitales', reverse: true, demoHref: 'https://giafoods.vercel.app/registro',
+      back: 'Menús digitales', reverse: true, demoHref: 'https://giafoods.vercel.app/registro',
       features: [
         { icon: 'M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 013.75 9.375v-4.5zM3.75 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 01-1.125-1.125v-4.5zM13.5 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0113.5 9.375v-4.5z', title: 'Pedido por QR en la mesa', desc: 'El cliente escanea, arma su pedido y lo envía sin instalar nada.' },
         { icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z', title: 'Cocina en tiempo real', desc: 'Cada orden llega al instante a la pantalla de cocina, sin papeles.' },
@@ -135,10 +174,10 @@ const SERVICES_DATA: Record<Lang, ServiceItem[]> = {
       ],
     },
     {
-      label: 'G.I.A. Cards · Tarjetas digitales', title: 'Tu tarjeta digital,', titleGrad: 'en un solo toque',
+      label: 'G.I.A. Cards · Tarjetas digitales', short: 'G.I.A. Cards', title: 'Tu tarjeta digital,', titleGrad: 'en un solo toque',
       desc: 'Tarjetas de presentación digitales con QR y NFC: tus clientes guardan tu contacto, redes y reseñas de Google con un toque, sin apps ni tarjetas de papel.',
       desc2: 'Diseñadas a tu medida y listas en pocos días, desde $15 al año con sticker NFC incluido.',
-      back: '03 — G.I.A. Cards',
+      back: 'G.I.A. Cards',
       demoHref: 'https://gia-cards.vercel.app/ejemplos', demoLabel: 'Mira tarjetas reales',
       features: [
         { icon: 'M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3', title: 'QR y NFC listos para usar', desc: 'Tu cliente acerca el celular o escanea el código, sin descargar nada.' },
@@ -149,10 +188,10 @@ const SERVICES_DATA: Record<Lang, ServiceItem[]> = {
   ],
   en: [
     {
-      label: 'Website Development', title: 'A site that actually', titleGrad: 'converts',
+      label: 'Websites & e-commerce', short: 'Websites & e-commerce', title: 'A site that actually', titleGrad: 'converts',
       desc: 'We build high-converting websites grounded in strategy — not just aesthetics. Every design decision is backed by data, user behavior, and what drives people to act.',
       desc2: 'From lean landing pages to full-scale e-commerce, we study your market, identify what works in your niche, and ship it fast.',
-      back: '01 — Web Development',
+      back: 'Websites & e-commerce',
       features: [
         { icon: 'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z', title: 'Built for conversion', desc: 'Custom layouts engineered to turn visitors into leads — and leads into clients.' },
         { icon: 'M13 10V3L4 14h7v7l9-11h-7z', title: 'Fast, SEO-ready from day one', desc: 'Sub-2-second load times with on-page SEO built in so Google notices you.' },
@@ -160,10 +199,10 @@ const SERVICES_DATA: Record<Lang, ServiceItem[]> = {
       ],
     },
     {
-      label: 'Smart Digital Menus', title: 'Your menu, your brand,', titleGrad: 'zero-friction ordering',
+      label: 'Smart Digital Menus', short: 'Digital menus', title: 'Your menu, your brand,', titleGrad: 'zero-friction ordering',
       desc: 'QR ordering at the table: customers build their order and send it straight to the kitchen, no app download required.',
       desc2: 'Categories, photos, and availability, with built-in electronic invoicing.',
-      back: '02 — Digital Menus', reverse: true, demoHref: 'https://giafoods.vercel.app/registro',
+      back: 'Digital menus', reverse: true, demoHref: 'https://giafoods.vercel.app/registro',
       features: [
         { icon: 'M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 013.75 9.375v-4.5zM3.75 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 01-1.125-1.125v-4.5zM13.5 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0113.5 9.375v-4.5z', title: 'QR ordering at the table', desc: 'Customers scan, order, and send — no app install, works on any device.' },
         { icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z', title: 'Kitchen connected in real time', desc: 'Every order hits the kitchen display instantly — no paper tickets, no transcription errors.' },
@@ -171,10 +210,10 @@ const SERVICES_DATA: Record<Lang, ServiceItem[]> = {
       ],
     },
     {
-      label: 'G.I.A. Cards · Digital Business Cards', title: 'Your business card,', titleGrad: 'one tap away',
+      label: 'G.I.A. Cards · Digital Business Cards', short: 'G.I.A. Cards', title: 'Your business card,', titleGrad: 'one tap away',
       desc: 'Digital business cards with QR and NFC: customers save your contact, socials, and Google reviews with one tap — no apps, no paper cards.',
       desc2: 'Custom-designed and ready in a few days, from $15 a year with an NFC sticker included.',
-      back: '03 — G.I.A. Cards',
+      back: 'G.I.A. Cards',
       demoHref: 'https://gia-cards.vercel.app/ejemplos', demoLabel: 'See real cards',
       features: [
         { icon: 'M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3', title: 'QR and NFC, ready to use', desc: 'Customers tap their phone or scan the code — nothing to download.' },
@@ -205,6 +244,16 @@ export default function Home() {
   const t = T[lang]
   const faqItems = FAQ_DATA[lang]
   const services = SERVICES_DATA[lang]
+  const agent = AGENT_DATA[lang]
+  const flipCards: FlipCard[] = [
+    {
+      label: agent.label, title: agent.title, titleGrad: agent.titleGrad,
+      heading: agent.whatIs, desc: agent.definition, desc2: agent.provider,
+      demoHref: '#contacto', demoLabel: agent.cta, back: agent.exampleTitle,
+      features: agent.steps.map((step, i) => ({ ...step, icon: AGENT_STEP_ICONS[i] })),
+    },
+    ...services,
+  ]
 
   useEffect(() => {
     setOpenFaq(null)
@@ -224,6 +273,7 @@ export default function Home() {
     const LAYERS = 6, NPL = 20, MAX_DIST = 180
     const mouse = { x: null as number | null, y: null as number | null }
     let rafId: number
+    let heroVisible = true
 
     class NNode {
       layer: number; baseX: number; baseY: number
@@ -272,6 +322,7 @@ export default function Home() {
     }
 
     function animate() {
+      if (!heroVisible) return
       ctx!.clearRect(0, 0, width, height)
       nodes.forEach(n => n.update())
       for (let i = 0; i < nodes.length; i++) {
@@ -305,6 +356,14 @@ export default function Home() {
     resize()
     animate()
 
+    // Fuera de vista el canvas no se dibuja: libera el hilo para el scroll de servicios.
+    const heroObserver = new IntersectionObserver(([entry]) => {
+      const resumed = entry.isIntersecting && !heroVisible
+      heroVisible = entry.isIntersecting
+      if (resumed) rafId = requestAnimationFrame(animate)
+    })
+    heroObserver.observe(canvas)
+
     const onResize = () => resize()
     window.addEventListener('resize', onResize)
 
@@ -321,6 +380,7 @@ export default function Home() {
 
     return () => {
       cancelAnimationFrame(rafId)
+      heroObserver.disconnect()
       window.removeEventListener('resize', onResize)
       hero?.removeEventListener('mousemove', onMove)
       hero?.removeEventListener('mouseleave', onLeave)
@@ -358,7 +418,7 @@ export default function Home() {
       { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
     )
     document.querySelectorAll('section').forEach(sec => {
-      sec.querySelectorAll<HTMLElement>('.feature-card').forEach((card, ci) => {
+      sec.querySelectorAll<HTMLElement>('.feature-card:not(.svc-track .feature-card)').forEach((card, ci) => {
         card.classList.add('reveal', ci % 2 === 0 ? 'fade-left' : 'fade-right')
         observer.observe(card)
       })
@@ -512,7 +572,7 @@ export default function Home() {
                 <span className="dot pulse-dot" />
                 <span className="badge-text">{t.hero.badge}</span>
               </div>
-              <h1 style={{ fontSize: 40, fontWeight: 900, lineHeight: 1.1, marginBottom: 24 }}>
+              <h1 style={{ fontSize: 40, fontWeight: 600, lineHeight: 1.1, marginBottom: 24 }}>
                 {t.hero.h1a}<br />{t.hero.h1b}
               </h1>
               <p style={{ color: '#9aafc7', fontSize: 18, lineHeight: 1.7, marginBottom: 16, maxWidth: 480 }}>{t.hero.p1}</p>
@@ -547,31 +607,34 @@ export default function Home() {
       </section>
 
       {/* ── SERVICIOS ──────────────────────────────────────────────────────── */}
-      <section id="servicios" style={{ padding: '96px 0', position: 'relative' }} className="grid-bg">
+      <section id="servicios" className="grid-bg svc-section">
         <div className="radial-glow" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', opacity: 0.5 }} />
-        <div style={{ position: 'relative', maxWidth: 1280, margin: '0 auto', padding: '0 32px' }}>
-          <div style={{ textAlign: 'center', marginBottom: 80 }}>
-            <div className="badge" style={{ marginBottom: 24 }}><span className="badge-text">{t.svc.badge}</span></div>
-            <h2 style={{ fontSize: 'clamp(28px,4vw,48px)', fontWeight: 900, marginBottom: 20, lineHeight: 1.2 }}>
-              {t.svc.h2a}<br /><span className="gradient-text">{t.svc.h2b}</span>
-            </h2>
-            <p style={{ color: '#9aafc7', fontSize: 17, maxWidth: 600, margin: '0 auto', lineHeight: 1.7 }}>{t.svc.desc}</p>
-          </div>
+        <div className="svc-intro">
+          <div className="badge" style={{ marginBottom: 24 }}><span className="badge-text">{t.svc.badge}</span></div>
+          <h2 style={{ fontSize: 'clamp(28px,4vw,48px)', fontWeight: 600, marginBottom: 20, lineHeight: 1.2 }}>
+            {t.svc.h2a}<br /><span className="gradient-text">{t.svc.h2b}</span>
+          </h2>
+          <p style={{ color: '#9aafc7', fontSize: 17, maxWidth: 600, margin: '0 auto', lineHeight: 1.7 }}>{t.svc.desc}</p>
+        </div>
 
+        <ServicesShowcase agent={agent} services={services} railLabel={t.nav.services} demoLabel={t.svc.demo} />
+
+        <div className="svc-flip-wrap">
           {/* Mobile flip cards */}
           <div className="service-flip-container">
-            {services.map((svc, i) => (
+            {flipCards.map((svc, i) => (
               <div key={i} className={`flip-card${flippedCard === i ? ' flipped' : ''}`} onClick={() => setFlippedCard(flippedCard === i ? null : i)}>
                 <div className="flip-card-inner">
                   <div className="flip-card-front" style={{ background: 'linear-gradient(135deg,rgba(14,31,58,0.95) 0%,rgba(10,22,40,0.98) 100%)', border: '1px solid rgba(0,212,255,0.15)', padding: '26px 22px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                     <div>
                       <span style={{ display: 'inline-block', fontSize: 11, color: '#00d4ff', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 14 }}>{svc.label}</span>
-                      <h3 style={{ fontSize: 24, fontWeight: 900, marginBottom: 14, lineHeight: 1.2 }}>{svc.title}<br /><span className="gradient-text">{svc.titleGrad}</span></h3>
+                      <h3 style={{ fontSize: 24, fontWeight: 600, marginBottom: 14, lineHeight: 1.2 }}>{svc.title}<br /><span className="gradient-text">{svc.titleGrad}</span></h3>
+                      {svc.heading && <h4 style={{ color: '#fff', fontSize: 15, fontWeight: 600, letterSpacing: '-0.01em', marginBottom: 6 }}>{svc.heading}</h4>}
                       <p style={{ color: '#9aafc7', fontSize: 14, lineHeight: 1.65, marginBottom: 10 }}>{svc.desc}</p>
                       <p style={{ color: 'rgba(154,175,199,0.6)', fontSize: 13, lineHeight: 1.65 }}>
                         {svc.desc2}
                         {svc.demoHref && (
-                          <> {' '}<a href={svc.demoHref} target="_blank" rel="noopener" onClick={(e) => e.stopPropagation()} style={{ color: '#00d4ff', fontWeight: 600, textDecoration: 'underline' }}>{svc.demoLabel ?? t.svc.demo}</a></>
+                          <> {' '}<a href={svc.demoHref} {...(svc.demoHref.startsWith('#') ? {} : { target: '_blank', rel: 'noopener' })} onClick={(e) => e.stopPropagation()} style={{ color: '#00d4ff', fontWeight: 600, textDecoration: 'underline' }}>{svc.demoLabel ?? t.svc.demo}</a></>
                         )}
                       </p>
                     </div>
@@ -608,44 +671,6 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Desktop service grids */}
-          {services.map((svc, si) => (
-            <div key={si}>
-              {si > 0 && <div className="divider-cyan service-sep" style={{ marginBottom: 80 }} />}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center', marginBottom: si < 2 ? 80 : 0 }} className="service-grid">
-                <div style={{ order: svc.reverse ? 1 : 2 }}>
-                  <div className="feature-card" style={{ borderRadius: 20, padding: 36 }}>
-                    <p style={{ fontSize: 11, color: 'rgba(154,175,199,0.5)', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 500, marginBottom: 12 }}>{svc.back}</p>
-                    <div className="divider-cyan" style={{ marginBottom: 24 }} />
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-                      {svc.features.map((f, fi) => (
-                        <div key={fi} style={{ display: 'flex', alignItems: 'flex-start', gap: 14 }}>
-                          <div style={{ width: 34, height: 34, minWidth: 34, borderRadius: 10, background: 'rgba(0,212,255,0.1)', border: '1px solid rgba(0,212,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <svg width="16" height="16" fill="none" stroke="#00d4ff" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={f.icon} /></svg>
-                          </div>
-                          <div>
-                            <p style={{ color: '#fff', fontWeight: 600, fontSize: 14, marginBottom: 4 }}>{f.title}</p>
-                            <p style={{ color: 'rgba(154,175,199,0.7)', fontSize: 13, lineHeight: 1.6 }}>{f.desc}</p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-                <div style={{ order: svc.reverse ? 2 : 1 }}>
-                  <span style={{ display: 'inline-block', fontSize: 11, color: '#00d4ff', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 16 }}>{svc.label}</span>
-                  <h3 style={{ fontSize: 'clamp(26px,3vw,40px)', fontWeight: 900, marginBottom: 20, lineHeight: 1.2 }}>{svc.title}<br /><span className="gradient-text">{svc.titleGrad}</span></h3>
-                  <p style={{ color: '#9aafc7', fontSize: 16, lineHeight: 1.75, marginBottom: 16 }}>{svc.desc}</p>
-                  <p style={{ color: 'rgba(154,175,199,0.6)', fontSize: 14, lineHeight: 1.75 }}>{svc.desc2}</p>
-                  {svc.demoHref && (
-                    <a href={svc.demoHref} target="_blank" rel="noopener" style={{ display: 'inline-block', marginTop: 16, color: '#00d4ff', fontSize: 14, fontWeight: 600, textDecoration: 'underline' }}>
-                      {svc.demoLabel ?? t.svc.demo}
-                    </a>
-                  )}
-                </div>
-              </div>
-            </div>
-          ))}
         </div>
       </section>
 
@@ -654,7 +679,7 @@ export default function Home() {
         <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 32px' }}>
           <div style={{ textAlign: 'center', marginBottom: 56 }}>
             <div className="badge" style={{ marginBottom: 24 }}><span className="badge-text">{t.test.badge}</span></div>
-            <h2 style={{ fontSize: 'clamp(26px,3.5vw,40px)', fontWeight: 900 }}>{t.test.h2}</h2>
+            <h2 style={{ fontSize: 'clamp(26px,3.5vw,40px)', fontWeight: 600 }}>{t.test.h2}</h2>
           </div>
           <div style={{ position: 'relative' }} className="testimonials-wrap">
             <button className="testimonials-arrow prev" onClick={() => scrollTestimonials(-1)} aria-label={t.test.prev}>
@@ -702,7 +727,7 @@ export default function Home() {
         <div style={{ position: 'relative', maxWidth: 800, margin: '0 auto', padding: '0 32px' }}>
           <div style={{ textAlign: 'center', marginBottom: 56 }}>
             <div className="badge" style={{ marginBottom: 24 }}><span className="badge-text">{t.faqSec.badge}</span></div>
-            <h2 style={{ fontSize: 'clamp(26px,3.5vw,40px)', fontWeight: 900 }}>{t.faqSec.h2}</h2>
+            <h2 style={{ fontSize: 'clamp(26px,3.5vw,40px)', fontWeight: 600 }}>{t.faqSec.h2}</h2>
           </div>
           <div>
             {faqItems.map((item, i) => (
@@ -727,7 +752,7 @@ export default function Home() {
         <div style={{ position: 'relative', maxWidth: 680, margin: '0 auto', padding: '0 24px' }}>
           <div style={{ textAlign: 'center', marginBottom: 48 }}>
             <div className="badge" style={{ marginBottom: 24 }}><span className="badge-text">{t.contact.badge}</span></div>
-            <h2 style={{ fontSize: 'clamp(28px,4vw,48px)', fontWeight: 900, marginBottom: 16, lineHeight: 1.15 }}>
+            <h2 style={{ fontSize: 'clamp(28px,4vw,48px)', fontWeight: 600, marginBottom: 16, lineHeight: 1.15 }}>
               {t.contact.h2a}<br />
               <span className="gradient-text text-glow">{t.contact.h2b}</span>
             </h2>
@@ -740,7 +765,7 @@ export default function Home() {
                 <div style={{ width: 64, height: 64, background: 'linear-gradient(135deg,rgba(0,212,255,0.15),rgba(0,153,204,0.1))', border: '1px solid rgba(0,212,255,0.3)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px' }}>
                   <svg width="28" height="28" fill="none" stroke="#00d4ff" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7" /></svg>
                 </div>
-                <h3 style={{ fontSize: 22, fontWeight: 800, marginBottom: 10 }} className="gradient-text">{t.contact.successTitle}</h3>
+                <h3 style={{ fontSize: 22, fontWeight: 600, marginBottom: 10 }} className="gradient-text">{t.contact.successTitle}</h3>
                 <p style={{ color: '#9aafc7', fontSize: 15, lineHeight: 1.7 }}>{t.contact.successDesc}</p>
               </div>
             ) : (

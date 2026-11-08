@@ -41,6 +41,7 @@ export default function StructuredData() {
         { '@type': 'Place', name: 'América Latina' },
       ],
       knowsLanguage: ['es', 'en'],
+      knowsAbout: ['Agentes de inteligencia artificial', 'Automatización con inteligencia artificial', 'Desarrollo web', 'E-commerce'],
       sameAs: [SITE.instagram, SITE.googleMaps],
       contactPoint: {
         '@type': 'ContactPoint',
@@ -62,6 +63,8 @@ export default function StructuredData() {
             provider: { '@id': ORG_ID },
             areaServed: { '@type': 'Country', name: 'Ecuador' },
             ...('url' in svc ? { url: svc.url } : {}),
+            ...('alternateName' in svc ? { alternateName: svc.alternateName } : {}),
+            ...('serviceType' in svc ? { serviceType: svc.serviceType } : {}),
           },
         })),
       },
