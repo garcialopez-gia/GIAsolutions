@@ -2,39 +2,12 @@ import type { MetadataRoute } from 'next'
 import { SITE_URL } from './lib/site'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date()
-
   return [
     {
       url: SITE_URL,
-      lastModified,
+      lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 1,
-    },
-    {
-      // Tarjeta de presentación digital (public/david/, servida vía rewrite)
-      url: `${SITE_URL}/david`,
-      lastModified,
-      changeFrequency: 'monthly',
-      priority: 0.5,
-    },
-    {
-      url: `${SITE_URL}/politica-de-privacidad.html`,
-      lastModified,
-      changeFrequency: 'yearly',
-      priority: 0.3,
-    },
-    {
-      url: `${SITE_URL}/terminos-de-servicio.html`,
-      lastModified,
-      changeFrequency: 'yearly',
-      priority: 0.3,
-    },
-    {
-      url: `${SITE_URL}/politica-de-cookies.html`,
-      lastModified,
-      changeFrequency: 'yearly',
-      priority: 0.3,
     },
   ]
 }

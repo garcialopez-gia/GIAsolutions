@@ -10,6 +10,14 @@
   ],
   "headers": [
     {
+      "source": "/(politica-de-privacidad|politica-de-cookies|terminos-de-servicio).html",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, follow" }]
+    },
+    {
+      "source": "/(david|martin|gabriela)(/index.html)?",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, follow" }]
+    },
+    {
       "source": "/david/david.vcf",
       "headers": [
         { "key": "Content-Type", "value": "text/vcard; charset=utf-8" },
